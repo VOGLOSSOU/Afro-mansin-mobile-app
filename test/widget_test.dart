@@ -25,6 +25,8 @@ void main() {
     await tester.pump(const Duration(seconds: 3));
     await tester.pumpAndSettle();
 
-    expect(find.text('Accueil — à venir'), findsOneWidget);
+    expect(find.text('Maladie'), findsOneWidget);
+    expect(find.text('Urgences'), findsOneWidget);
+    expect(find.text('Vitamines'), findsOneWidget);
   });
 }

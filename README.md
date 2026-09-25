@@ -22,7 +22,7 @@ techniques portent encore l'ancien nom.
 | Splash screen (natif + Flutter animé) | ✅ |
 | Onboarding 3 pages (défilement, « Passer », affiché une seule fois) | ✅ |
 | Thème et charte graphique | ✅ |
-| Accueil Maladie / Urgences / Vitamines | ⏳ écran provisoire |
+| Accueil Maladie / Urgences / Vitamines + barre de recherche | ✅ UI (les taps affichent « Bientôt disponible ») |
 | Parcours pays → maladie/vitamine/urgence → fiche plante | ⏳ en attente du contrat d'API |
 | Lecture audio des noms locaux | ⏳ |
 | Suivi à 48 h (notification locale + questionnaire) | ⏳ |
@@ -78,11 +78,12 @@ lib/
 │   ├── router/app_router.dart      # Routes : / (splash), /onboarding, /home
 │   └── theme/                      # app_colors, app_spacing, app_theme
 ├── core/
-│   └── utils/app_info.dart         # Nom de l'app, slogan, avertissement médical
+│   ├── utils/app_info.dart         # Nom de l'app, slogan, avertissement médical
+│   └── widgets/                    # medical_disclaimer (bas de chaque écran)
 └── features/
     ├── splash/                     # Splash animé → onboarding ou accueil
     ├── onboarding/                 # 3 pages + indicateur « déjà vu » (shared_preferences)
-    └── home/                       # Accueil (provisoire)
+    └── home/                       # Accueil : recherche + Maladie / Urgences / Vitamines
 ```
 
 ### Dépendances
