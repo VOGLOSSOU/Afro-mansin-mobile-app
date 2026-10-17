@@ -9,7 +9,7 @@ void main() {
     SharedPreferences.setMockInitialValues({});
     await tester.pumpWidget(const ProviderScope(child: AmaApp()));
 
-    expect(find.text(AppInfo.name), findsOneWidget);
+    expect(find.text(AppInfo.tagline), findsOneWidget);
 
     await tester.pump(const Duration(seconds: 7));
     await tester.pumpAndSettle();

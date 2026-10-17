@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -9,24 +10,23 @@ import '../../../../core/utils/app_info.dart';
 import '../../data/onboarding_repository.dart';
 import '../widgets/onboarding_page.dart';
 
+// Images plein écran (portrait) — originaux dans design/onboarding/.
 const _pages = [
   OnboardingPage(
-    icon: Icons.eco_rounded,
-    color: AppColors.primary,
+    imageAsset: 'assets/images/onboarding_1.jpg',
     title: "Le savoir des plantes d'Afrique",
     body: 'Trouvez les plantes médicinales utilisées dans votre pays : '
         'par maladie, en cas d\'urgence ou pour vos besoins en vitamines.',
   ),
   OnboardingPage(
-    icon: Icons.record_voice_over_rounded,
-    color: AppColors.accent,
+    imageAsset: 'assets/images/onboarding_2.jpg',
     title: 'Dans votre langue',
     body: 'Chaque plante a ses noms en fon, yoruba, adja, dendi… '
         'Écoutez-les pour la reconnaître et en parler autour de vous.',
   ),
   OnboardingPage(
-    icon: Icons.health_and_safety_rounded,
-    color: AppColors.secondary,
+    imageAsset: 'assets/images/onboarding_3.jpg',
+    imageAlignment: Alignment(0.5, 0), // la tasse est à droite
     title: 'Une information, pas une ordonnance',
     body: AppInfo.medicalDisclaimer,
     highlightBody: true,
@@ -71,6 +71,19 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // Précharge les images pour un défilement sans flash
+    for (final page in _pages) {
+      precacheImage(
+        AssetImage(page.imageAsset),
+        context,
+        onError: (_, _) {}, // image pas encore fournie : fond de secours
+      );
+    }
+  }
+
+  @override
   void dispose() {
     _pageController.dispose();
     super.dispose();
@@ -78,50 +91,66 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Column(
+    // Icônes de la barre de statut en clair, sur l'image
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle.light,
+      child: Scaffold(
+        backgroundColor: AppColors.primaryDark,
+        body: Stack(
           children: [
-            Align(
-              alignment: Alignment.centerRight,
-              child: Padding(
-                padding: const EdgeInsets.all(AppSpacing.sm),
-                // Garde la hauteur réservée sur la dernière page pour éviter un saut
-                child: Visibility(
-                  visible: !_isLastPage,
-                  maintainSize: true,
-                  maintainAnimation: true,
-                  maintainState: true,
-                  child: TextButton(
-                    onPressed: _skip,
-                    child: const Text('Passer'),
+            PageView(
+              controller: _pageController,
+              onPageChanged: (index) => setState(() => _currentIndex = index),
+              children: _pages,
+            ),
+            SafeArea(
+              child: Align(
+                alignment: Alignment.topRight,
+                child: SizedBox(
+                  height: OnboardingPage.topBarHeight,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: AppSpacing.sm,
+                    ),
+                    child: Visibility(
+                      visible: !_isLastPage,
+                      child: TextButton(
+                        onPressed: _skip,
+                        style: TextButton.styleFrom(
+                          foregroundColor: AppColors.textOnPrimary,
+                        ),
+                        child: const Text('Passer'),
+                      ),
+                    ),
                   ),
                 ),
               ),
             ),
-            Expanded(
-              child: PageView(
-                controller: _pageController,
-                onPageChanged: (index) => setState(() => _currentIndex = index),
-                children: _pages,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(
-                AppSpacing.xl,
-                AppSpacing.md,
-                AppSpacing.xl,
-                AppSpacing.xl,
-              ),
-              child: Column(
-                children: [
-                  _PageDots(count: _pages.length, current: _currentIndex),
-                  const SizedBox(height: AppSpacing.xl),
-                  FilledButton(
-                    onPressed: _isLastPage ? _finish : _next,
-                    child: Text(_isLastPage ? 'Commencer' : 'Suivant'),
+            SafeArea(
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: SizedBox(
+                  height: OnboardingPage.controlsHeight,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(
+                      AppSpacing.xl,
+                      AppSpacing.md,
+                      AppSpacing.xl,
+                      AppSpacing.xl,
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        _PageDots(count: _pages.length, current: _currentIndex),
+                        const SizedBox(height: AppSpacing.xl),
+                        FilledButton(
+                          onPressed: _isLastPage ? _finish : _next,
+                          child: Text(_isLastPage ? 'Commencer' : 'Suivant'),
+                        ),
+                      ],
+                    ),
                   ),
-                ],
+                ),
               ),
             ),
           ],
@@ -149,7 +178,9 @@ class _PageDots extends StatelessWidget {
           width: isActive ? 24 : 8,
           height: 8,
           decoration: BoxDecoration(
-            color: isActive ? AppColors.primary : AppColors.border,
+            color: isActive
+                ? AppColors.textOnPrimary
+                : AppColors.textOnPrimary.withValues(alpha: 0.4),
             borderRadius: BorderRadius.circular(AppRadius.full),
           ),
         );

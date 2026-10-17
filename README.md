@@ -22,6 +22,7 @@ techniques portent encore l'ancien nom.
 | Splash screen (natif + Flutter, logo qui pulse ~6 s) | ✅ |
 | Typographie Fraunces + Noto Sans (embarquées) | ✅ |
 | Onboarding 3 pages (défilement, « Passer », affiché une seule fois) | ✅ |
+| Images plein écran de l'onboarding | ✅ `assets/images/onboarding_1-3.jpg` (originaux PNG dans `design/onboarding/`) |
 | Thème et charte graphique | ✅ |
 | Accueil Maladie / Urgences / Vitamines + barre de recherche | ✅ UI (les taps affichent « Bientôt disponible ») |
 | Parcours pays → maladie/vitamine/urgence → fiche plante | ⏳ en attente du contrat d'API |
@@ -162,8 +163,6 @@ Règles :
 | Boutons, onglets, labels | `labelLarge` | Noto Sans | 14 / 500 |
 | Légendes, badges | `labelSmall` | Noto Sans | 12 / 500 |
 
-Seule exception : le nom « Ama » du splash, en Fraunces 48, traité comme un logotype.
-
 Les fichiers `.ttf` statiques ont été générés depuis les polices variables de Google Fonts
 (Fraunces : opsz 24, SOFT 0, WONK 0 ; Noto Sans : wdth 100).
 
@@ -174,8 +173,9 @@ Phrase de contrôle des caractères : `Amavivɛ ɖɔ Ɖɛ Ɔ ẹ ọ ṣ ǹ ɛ̀
 - `ama-logos.png` : image source générée (3 déclinaisons du même logo sur une seule image).
 - `assets/images/` : versions à fond transparent **utilisées par l'app** :
   - `logo_symbol.png` : symbole couleur ;
-  - `logo_symbol_light.png` : symbole crème, pour les fonds verts (utilisé par le splash) ;
-  - `logo_full.png` : symbole + « Ama ».
+  - `logo_symbol_light.png` : symbole crème, pour les fonds verts ;
+  - `logo_full.png` : symbole + « Ama » ;
+  - `logo_full_light.png` : symbole + « Ama » en crème, pour les fonds verts (utilisé par le splash).
 - `design/logo/` : déclinaisons pour la communication (non embarquées dans l'app), dont les
   versions sur fond vert en 1024 × 1024.
 

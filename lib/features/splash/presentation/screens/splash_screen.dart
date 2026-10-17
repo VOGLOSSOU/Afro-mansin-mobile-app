@@ -91,21 +91,12 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
                 ScaleTransition(
                   scale: _pulse,
                   child: Image.asset(
-                    'assets/images/logo_symbol_light.png',
-                    height: 120,
+                    'assets/images/logo_full_light.png',
+                    height: 180,
+                    semanticLabel: AppInfo.name,
                   ),
                 ),
                 const SizedBox(height: AppSpacing.xl),
-                // Nom en logotype : seule exception à l'échelle de tailles
-                Text(
-                  AppInfo.name,
-                  style: textTheme.headlineLarge?.copyWith(
-                    fontSize: 48,
-                    height: 1.1,
-                    color: AppColors.textOnPrimary,
-                  ),
-                ),
-                const SizedBox(height: AppSpacing.sm),
                 Text(
                   AppInfo.tagline,
                   style: textTheme.bodyLarge?.copyWith(

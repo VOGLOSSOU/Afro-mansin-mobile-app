@@ -27,6 +27,10 @@ class AppColors {
   // pour qu'il garde tout son poids.
   static const Color danger         = Color(0xFFB3261E);
 
+  // === OMBRE SUR IMAGES ===
+  // Brun très sombre (plus chaud que le noir) pour les dégradés de lisibilité
+  static const Color shade          = Color(0xFF15100B);
+
   // === BORDURES ===
   static const Color border         = Color(0xFFE6DDD0);
 }

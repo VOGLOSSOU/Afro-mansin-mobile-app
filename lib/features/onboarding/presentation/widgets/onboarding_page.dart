@@ -3,21 +3,31 @@ import 'package:flutter/material.dart';
 import '../../../../app/theme/app_colors.dart';
 import '../../../../app/theme/app_spacing.dart';
 
+/// Page d'onboarding : image plein écran, ombre dégradée pour la lisibilité,
+/// texte en blanc en bas de l'écran.
 class OnboardingPage extends StatelessWidget {
-  final IconData icon;
-  final Color color;
+  final String imageAsset;
+
+  /// Cadrage de l'image quand l'écran la rogne (ex. sujet décentré).
+  final Alignment imageAlignment;
+
   final String title;
   final String body;
   final String? note;
 
-  /// Met le texte en avant dans un encadré (ex. avertissement médical) au lieu
-  /// d'un paragraphe centré.
+  /// Texte un peu plus appuyé (ex. avertissement médical).
   final bool highlightBody;
+
+  /// Hauteur réservée en bas pour les points et le bouton de l'écran parent.
+  static const double controlsHeight = 140;
+
+  /// Hauteur réservée en haut pour le bouton « Passer ».
+  static const double topBarHeight = 56;
 
   const OnboardingPage({
     super.key,
-    required this.icon,
-    required this.color,
+    required this.imageAsset,
+    this.imageAlignment = Alignment.center,
     required this.title,
     required this.body,
     this.note,
@@ -27,83 +37,107 @@ class OnboardingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final safe = MediaQuery.paddingOf(context);
+    final top = safe.top + topBarHeight;
+    final bottom = safe.bottom + controlsHeight;
 
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        // L'illustration rétrécit sur les petits écrans pour laisser la place au texte
-        final isCompact = constraints.maxHeight < 520;
-        final illustrationSize =
-            (constraints.maxHeight * (isCompact ? 0.2 : 0.26)).clamp(72.0, 168.0);
-
-        // Scrollable en dernier recours (très petits écrans / grandes polices)
-        return SingleChildScrollView(
-          padding: const EdgeInsets.fromLTRB(
-            AppSpacing.xl,
-            AppSpacing.lg,
-            AppSpacing.xl,
-            AppSpacing.lg,
-          ),
-          child: Column(
-            children: [
-              // Placeholder en attendant les illustrations
-              Container(
-                width: illustrationSize,
-                height: illustrationSize,
-                decoration: BoxDecoration(
-                  color: color.withValues(alpha: 0.12),
-                  shape: BoxShape.circle,
-                ),
-                child: Icon(icon, size: illustrationSize * 0.48, color: color),
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        Image.asset(
+          imageAsset,
+          fit: BoxFit.cover,
+          alignment: imageAlignment,
+          // Tant que l'image n'est pas fournie : fond vert dégradé
+          errorBuilder: (_, _, _) => const _FallbackBackground(),
+        ),
+        const _ReadabilityShade(),
+        LayoutBuilder(
+          builder: (context, constraints) {
+            // Texte calé en bas ; défile seulement si l'écran est trop petit
+            return SingleChildScrollView(
+              padding: EdgeInsets.fromLTRB(
+                AppSpacing.xl,
+                top,
+                AppSpacing.xl,
+                bottom,
               ),
-              SizedBox(height: isCompact ? AppSpacing.lg : AppSpacing.xl),
-              Text(
-                title,
-                textAlign: TextAlign.center,
-                style: textTheme.headlineLarge,
-              ),
-              const SizedBox(height: AppSpacing.lg),
-              if (highlightBody)
-                _HighlightedBody(text: body, color: color)
-              else
-                Text(
-                  body,
-                  textAlign: TextAlign.center,
-                  style: textTheme.bodyLarge?.copyWith(
-                    color: AppColors.textSecondary,
-                  ),
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  minHeight: (constraints.maxHeight - top - bottom)
+                      .clamp(0.0, double.infinity),
                 ),
-              if (note != null) ...[
-                const SizedBox(height: AppSpacing.lg),
-                _Note(text: note!),
-              ],
-            ],
-          ),
-        );
-      },
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: textTheme.headlineLarge?.copyWith(
+                        color: AppColors.textOnPrimary,
+                      ),
+                    ),
+                    const SizedBox(height: AppSpacing.md),
+                    Text(
+                      body,
+                      style: textTheme.bodyLarge?.copyWith(
+                        color: AppColors.textOnPrimary.withValues(
+                          alpha: highlightBody ? 1 : 0.9,
+                        ),
+                        fontWeight: highlightBody ? FontWeight.w500 : null,
+                      ),
+                    ),
+                    if (note != null) ...[
+                      const SizedBox(height: AppSpacing.lg),
+                      _Note(text: note!),
+                    ],
+                  ],
+                ),
+              ),
+            );
+          },
+        ),
+      ],
     );
   }
 }
 
-class _HighlightedBody extends StatelessWidget {
-  final String text;
-  final Color color;
-
-  const _HighlightedBody({required this.text, required this.color});
+/// Ombre dégradée : légère en haut (bouton « Passer »), forte en bas (texte).
+class _ReadabilityShade extends StatelessWidget {
+  const _ReadabilityShade();
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(AppSpacing.lg),
+    return DecoratedBox(
       decoration: BoxDecoration(
-        color: color.withValues(alpha: 0.08),
-        borderRadius: BorderRadius.circular(AppRadius.md),
-        border: Border(left: BorderSide(color: color, width: 4)),
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          stops: const [0.0, 0.2, 0.4, 0.65, 1.0],
+          colors: [
+            AppColors.shade.withValues(alpha: 0.45),
+            AppColors.shade.withValues(alpha: 0.0),
+            AppColors.shade.withValues(alpha: 0.35),
+            AppColors.shade.withValues(alpha: 0.8),
+            AppColors.shade.withValues(alpha: 0.92),
+          ],
+        ),
       ),
-      child: Text(
-        text,
-        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-          fontWeight: FontWeight.w500,
+    );
+  }
+}
+
+class _FallbackBackground extends StatelessWidget {
+  const _FallbackBackground();
+
+  @override
+  Widget build(BuildContext context) {
+    return const DecoratedBox(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [AppColors.primary, AppColors.primaryDark],
         ),
       ),
     );
@@ -117,23 +151,21 @@ class _Note extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final color = AppColors.textOnPrimary.withValues(alpha: 0.8);
+
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Padding(
-          padding: EdgeInsets.only(top: 1),
-          child: Icon(
-            Icons.notifications_none_rounded,
-            size: 20,
-            color: AppColors.primary,
-          ),
+        Padding(
+          padding: const EdgeInsets.only(top: 1),
+          child: Icon(Icons.notifications_none_rounded, size: 20, color: color),
         ),
         const SizedBox(width: AppSpacing.md),
         Expanded(
           child: Text(
             text,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: AppColors.textSecondary,
+              color: color,
             ),
           ),
         ),
