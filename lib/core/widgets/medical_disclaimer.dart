@@ -24,12 +24,11 @@ class MedicalDisclaimer extends StatelessWidget {
             color: AppColors.textSecondary,
           ),
           const SizedBox(width: AppSpacing.sm),
-          const Expanded(
+          Expanded(
             child: Text(
               AppInfo.medicalDisclaimer,
-              style: TextStyle(
-                fontSize: 12,
-                height: 1.4,
+              style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                fontWeight: FontWeight.w400,
                 color: AppColors.textSecondary,
               ),
             ),

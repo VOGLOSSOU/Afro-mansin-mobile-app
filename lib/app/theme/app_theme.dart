@@ -2,13 +2,21 @@ import 'package:flutter/material.dart';
 
 import 'app_colors.dart';
 import 'app_spacing.dart';
+import 'app_typography.dart';
 
 class AppTheme {
   AppTheme._();
 
   static ThemeData get light {
+    final textTheme = AppTypography.textTheme.apply(
+      bodyColor: AppColors.textPrimary,
+      displayColor: AppColors.textPrimary,
+    );
+
     return ThemeData(
       useMaterial3: true,
+      fontFamily: AppTypography.body,
+      textTheme: textTheme,
       colorScheme: const ColorScheme.light(
         primary: AppColors.primary,
         onPrimary: AppColors.textOnPrimary,
@@ -23,18 +31,19 @@ class AppTheme {
         outline: AppColors.border,
       ),
       scaffoldBackgroundColor: AppColors.background,
-      appBarTheme: const AppBarTheme(
+      appBarTheme: AppBarTheme(
         backgroundColor: AppColors.background,
         foregroundColor: AppColors.textPrimary,
         elevation: 0,
         scrolledUnderElevation: 0,
+        titleTextStyle: textTheme.headlineMedium,
       ),
       filledButtonTheme: FilledButtonThemeData(
         style: FilledButton.styleFrom(
           backgroundColor: AppColors.primary,
           foregroundColor: AppColors.textOnPrimary,
           minimumSize: const Size.fromHeight(52),
-          textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+          textStyle: textTheme.labelLarge,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(AppRadius.md),
           ),
@@ -43,7 +52,7 @@ class AppTheme {
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
           foregroundColor: AppColors.textSecondary,
-          textStyle: const TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
+          textStyle: textTheme.labelLarge,
         ),
       ),
     );

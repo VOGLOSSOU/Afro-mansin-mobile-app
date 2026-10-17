@@ -22,6 +22,8 @@ class HomeEntryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return Material(
       color: AppColors.surface,
       borderRadius: BorderRadius.circular(AppRadius.lg),
@@ -52,18 +54,14 @@ class HomeEntryCard extends StatelessWidget {
                   children: [
                     Text(
                       title,
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w700,
-                        color: AppColors.textPrimary,
+                      style: textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
                     const SizedBox(height: AppSpacing.xs),
                     Text(
                       subtitle,
-                      style: const TextStyle(
-                        fontSize: 14,
-                        height: 1.35,
+                      style: textTheme.bodyMedium?.copyWith(
                         color: AppColors.textSecondary,
                       ),
                     ),

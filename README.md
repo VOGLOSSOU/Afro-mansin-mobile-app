@@ -19,7 +19,8 @@ techniques portent encore l'ancien nom.
 
 | Élément | État |
 |---|---|
-| Splash screen (natif + Flutter animé) | ✅ |
+| Splash screen (natif + Flutter, logo qui pulse ~6 s) | ✅ |
+| Typographie Fraunces + Noto Sans (embarquées) | ✅ |
 | Onboarding 3 pages (défilement, « Passer », affiché une seule fois) | ✅ |
 | Thème et charte graphique | ✅ |
 | Accueil Maladie / Urgences / Vitamines + barre de recherche | ✅ UI (les taps affichent « Bientôt disponible ») |
@@ -69,6 +70,20 @@ obligatoire** pour tout le code de ce projet. En résumé :
 - `main()` appelle `runApp()` immédiatement, sans aucun `await` avant le premier rendu.
 - On n'ajoute une dépendance ou un composant partagé que quand le besoin est concret.
 
+### Connexion internet requise
+
+Décision du 17/10/2026 : **pour l'instant, l'app fonctionne uniquement en ligne**. Le mode
+hors-ligne sera ajouté une fois l'app stable. En attendant :
+
+- pas de cache persistant des données de l'API (textes, photos, audios). Le cache
+  « stale-while-error » du guide (§5) est donc mis de côté pour l'instant ;
+- seul un cache en mémoire pour la durée de la session est autorisé (Riverpod `keepAlive`), pour
+  éviter de recharger un écran déjà visité ;
+- chaque écran qui appelle l'API affiche un état clair « Pas de connexion internet » avec un
+  bouton **Réessayer** ;
+- tout accès aux données passe par les repositories (couche `data`). Le mode hors-ligne pourra
+  ainsi y être ajouté plus tard sans toucher aux écrans.
+
 ### Arborescence actuelle
 
 ```
@@ -76,7 +91,7 @@ lib/
 ├── main.dart                       # runApp immédiat + MaterialApp.router
 ├── app/
 │   ├── router/app_router.dart      # Routes : / (splash), /onboarding, /home
-│   └── theme/                      # app_colors, app_spacing, app_theme
+│   └── theme/                      # app_colors, app_spacing, app_typography, app_theme
 ├── core/
 │   ├── utils/app_info.dart         # Nom de l'app, slogan, avertissement médical
 │   └── widgets/                    # medical_disclaimer (bas de chaque écran)
@@ -93,6 +108,8 @@ lib/
 | `flutter_riverpod` ^2.6 | State management |
 | `go_router` | Navigation |
 | `shared_preferences` | Préférences locales (onboarding vu) |
+
+Les polices ne passent pas par `google_fonts` : elles sont déclarées dans `pubspec.yaml`.
 | `flutter_native_splash` (dev) | Génération du splash natif |
 
 ---
@@ -116,6 +133,41 @@ Palette « terre et plantes », définie dans [lib/app/theme/app_colors.dart](li
 L'avertissement médical (« Les conseils contenus dans cette application ne représentent
 aucunement une consultation médicale… ») est centralisé dans `AppInfo.medicalDisclaimer`. La
 maquette l'affiche sur tous les écrans.
+
+### Typographie
+
+Deux polices, **embarquées dans l'app** (`assets/fonts/`, licence OFL, aucun téléchargement à
+l'exécution) et centralisées dans [lib/app/theme/app_typography.dart](lib/app/theme/app_typography.dart) :
+
+- **Fraunces** : uniquement les titres et les noms de plantes en gros. Jamais pour du texte
+  courant ni des boutons.
+- **Noto Sans** : tout le reste (textes, boutons, menus, champs, légendes).
+
+Règles :
+
+- **Noms en langues locales (fon, yoruba, goun…) toujours en Noto Sans**, même dans un titre.
+  Fraunces n'a pas les lettres ɛ ɔ ɖ Ɖ Ɔ ǹ (vérifié) : elles basculent en Noto Sans via le
+  repli (`fontFamilyFallback`), et le mot devient visuellement mélangé.
+- **Noms scientifiques toujours en italique** : utiliser `AppTypography.scientificName`.
+- Jamais de `fontFamily` ni de taille en dur dans un widget : partir de
+  `Theme.of(context).textTheme.xxx` (éventuellement `.copyWith(color: …)`).
+
+| Usage | Style du thème | Police | Taille / graisse |
+|---|---|---|---|
+| Titre écran / nom de plante (fiche) | `headlineLarge` | Fraunces | 28 / 600 |
+| Titre de section | `headlineMedium` | Fraunces | 22 / 600 |
+| Nom de plante dans une carte | `titleMedium` | Fraunces | 18 / 500 |
+| Texte courant | `bodyLarge` | Noto Sans | 16 / 400 |
+| Texte secondaire | `bodyMedium` | Noto Sans | 14 / 400 |
+| Boutons, onglets, labels | `labelLarge` | Noto Sans | 14 / 500 |
+| Légendes, badges | `labelSmall` | Noto Sans | 12 / 500 |
+
+Seule exception : le nom « Ama » du splash, en Fraunces 48, traité comme un logotype.
+
+Les fichiers `.ttf` statiques ont été générés depuis les polices variables de Google Fonts
+(Fraunces : opsz 24, SOFT 0, WONK 0 ; Noto Sans : wdth 100).
+
+Phrase de contrôle des caractères : `Amavivɛ ɖɔ Ɖɛ Ɔ ẹ ọ ṣ ǹ ɛ̀ ɔ́ - Vernonia amygdalina`.
 
 ### Logo
 
@@ -174,7 +226,7 @@ Cible envisagée : `com.<domaine-du-client>.app`, à caler sur le nom de domaine
 - **Contrat d'API** (endpoints + exemples JSON) : nécessaire pour les parcours et la fiche plante.
 - **Authentification** : l'API sera-t-elle appelée sans compte, ou avec un token ? La réponse
   décide si l'`AuthInterceptor` du guide est utile.
-- **Hors-ligne** : quel niveau de cache pour les textes, photos et audios ?
+- **Hors-ligne** : reporté. Voir [Connexion internet requise](#connexion-internet-requise).
 - **Permission des notifications** : à demander avec l'implémentation du suivi à 48 h (l'onboarding
   l'annonce déjà en page 3).
 - **Logo haute résolution** : pour l'icône de l'app et le splash natif.

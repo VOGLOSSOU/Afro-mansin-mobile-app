@@ -29,6 +29,7 @@ const _pages = [
     color: AppColors.secondary,
     title: 'Une information, pas une ordonnance',
     body: AppInfo.medicalDisclaimer,
+    highlightBody: true,
     note: '48 heures après avoir consulté une recette, nous vous demanderons '
         'comment elle s\'est passée, pour améliorer les conseils.',
   ),
@@ -108,7 +109,7 @@ class _OnboardingScreenState extends ConsumerState<OnboardingScreen> {
             Padding(
               padding: const EdgeInsets.fromLTRB(
                 AppSpacing.xl,
-                AppSpacing.lg,
+                AppSpacing.md,
                 AppSpacing.xl,
                 AppSpacing.xl,
               ),

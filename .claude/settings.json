@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(FLUTTER_ROOT=/home/nathan-voglossou/flutter flutter test test/screenshots_test.dart --update-goldens)",
+      "Bash(python3 -P -c ' *)",
+      "Bash(sed -i 's/Duration\\(seconds: 3\\)/Duration\\(seconds: 7\\)/g' test/widget_test.dart)",
+      "Bash(flutter analyze *)",
+      "Bash(python3 -P -)",
+      "Bash(cp test/goldens/*.png /tmp/claude-1000/-home-nathan-voglossou-Afro-mansin-mobile-app/ed93aa26-3fca-4350-9945-51f9a12806e7/scratchpad/captures/)",
+      "Bash(flutter test *)",
+      "Bash(grep -n \"Splash screen\\\\|### Logo\\\\|app_colors, app_spacing\\\\|shared_preferences\\\\` |\" README.md)"
+    ]
+  }
+}

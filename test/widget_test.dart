@@ -11,7 +11,7 @@ void main() {
 
     expect(find.text(AppInfo.name), findsOneWidget);
 
-    await tester.pump(const Duration(seconds: 3));
+    await tester.pump(const Duration(seconds: 7));
     await tester.pumpAndSettle();
 
     expect(find.text('Passer'), findsOneWidget);
@@ -22,7 +22,7 @@ void main() {
     SharedPreferences.setMockInitialValues({'onboarding_seen': true});
     await tester.pumpWidget(const ProviderScope(child: AmaApp()));
 
-    await tester.pump(const Duration(seconds: 3));
+    await tester.pump(const Duration(seconds: 7));
     await tester.pumpAndSettle();
 
     expect(find.text('Maladie'), findsOneWidget);

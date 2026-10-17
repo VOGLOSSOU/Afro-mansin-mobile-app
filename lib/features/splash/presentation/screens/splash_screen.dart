@@ -17,8 +17,8 @@ class SplashScreen extends ConsumerStatefulWidget {
 
 class _SplashScreenState extends ConsumerState<SplashScreen>
     with TickerProviderStateMixin {
-  // Durée minimale d'affichage — laisse le temps à 2-3 pulsations du logo
-  static const _minDisplay = Duration(milliseconds: 2600);
+  // Durée d'affichage : le logo pulse pendant ~6 s avant de passer à la suite
+  static const _minDisplay = Duration(seconds: 6);
 
   // Apparition initiale
   late final AnimationController _introController;
@@ -76,6 +76,8 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return Scaffold(
       backgroundColor: AppColors.primary,
       body: Center(
@@ -94,21 +96,20 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
                   ),
                 ),
                 const SizedBox(height: AppSpacing.xl),
-                const Text(
+                // Nom en logotype : seule exception à l'échelle de tailles
+                Text(
                   AppInfo.name,
-                  style: TextStyle(
-                    fontSize: 44,
-                    fontWeight: FontWeight.w700,
-                    letterSpacing: 2,
+                  style: textTheme.headlineLarge?.copyWith(
+                    fontSize: 48,
+                    height: 1.1,
                     color: AppColors.textOnPrimary,
                   ),
                 ),
                 const SizedBox(height: AppSpacing.sm),
                 Text(
                   AppInfo.tagline,
-                  style: TextStyle(
-                    fontSize: 15,
-                    color: AppColors.textOnPrimary.withValues(alpha: 0.85),
+                  style: textTheme.bodyLarge?.copyWith(
+                    color: AppColors.textOnPrimary.withValues(alpha: 0.9),
                   ),
                 ),
               ],

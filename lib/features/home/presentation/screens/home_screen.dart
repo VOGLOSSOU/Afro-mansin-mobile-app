@@ -20,6 +20,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -37,25 +39,13 @@ class HomeScreen extends StatelessWidget {
                     children: [
                       Image.asset('assets/images/logo_symbol.png', height: 36),
                       const SizedBox(width: AppSpacing.sm),
-                      const Text(
-                        AppInfo.name,
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.w700,
-                          color: AppColors.textPrimary,
-                        ),
-                      ),
+                      Text(AppInfo.name, style: textTheme.headlineMedium),
                     ],
                   ),
                   const SizedBox(height: AppSpacing.xl),
-                  const Text(
+                  Text(
                     'Que recherchez-vous ?',
-                    style: TextStyle(
-                      fontSize: 26,
-                      fontWeight: FontWeight.w700,
-                      height: 1.2,
-                      color: AppColors.textPrimary,
-                    ),
+                    style: textTheme.headlineLarge,
                   ),
                   const SizedBox(height: AppSpacing.lg),
                   _SearchBar(onTap: () => _comingSoon(context)),
@@ -118,13 +108,15 @@ class _SearchBar extends StatelessWidget {
             borderRadius: BorderRadius.circular(AppRadius.md),
             border: Border.all(color: AppColors.border),
           ),
-          child: const Row(
+          child: Row(
             children: [
-              Icon(Icons.search_rounded, color: AppColors.textSecondary),
-              SizedBox(width: AppSpacing.md),
+              const Icon(Icons.search_rounded, color: AppColors.textSecondary),
+              const SizedBox(width: AppSpacing.md),
               Text(
                 'Recherche',
-                style: TextStyle(fontSize: 16, color: AppColors.textSecondary),
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                  color: AppColors.textSecondary,
+                ),
               ),
             ],
           ),
