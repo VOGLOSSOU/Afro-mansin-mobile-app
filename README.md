@@ -3,8 +3,8 @@
 Application mobile Flutter (Android + iOS) de **plantes médicinales africaines**. L'utilisateur
 choisit un pays, puis une maladie, une urgence ou une vitamine, et arrive sur la fiche d'une
 plante : noms en langues locales (fon, yoruba, adja, dendi…) avec audio, photos, recette,
-posologie et mises en garde. 48 h après la consultation d'une recette, un questionnaire de suivi
-recueille le retour de l'utilisateur (pharmacovigilance).
+posologie et mises en garde. Le suivi post-utilisation à 48 h reste reporté et ne fait pas partie
+des parcours actuellement intégrés.
 
 > Ce dépôt contient **uniquement l'app mobile**. Le backend, l'API et le serveur sont développés
 > ailleurs. L'app ne fait que consommer l'API.
@@ -24,10 +24,10 @@ techniques portent encore l'ancien nom.
 | Onboarding 3 pages (défilement, « Passer », affiché une seule fois) | ✅ |
 | Images plein écran de l'onboarding | ✅ `assets/images/onboarding_1-3.jpg` (originaux PNG dans `design/onboarding/`) |
 | Thème et charte graphique | ✅ |
-| Accueil Maladie / Urgences / Vitamines + barre de recherche | ✅ UI (les taps affichent « Bientôt disponible ») |
-| Parcours pays → maladie/vitamine/urgence → fiche plante | ⏳ en attente du contrat d'API |
-| Lecture audio des noms locaux | ⏳ |
-| Suivi à 48 h (notification locale + questionnaire) | ⏳ |
+| Accueil Maladie / Urgences / Vitamines + recherche locale des plantes | ✅ relié aux parcours |
+| Parcours pays → maladie/vitamine/urgence → fiche plante ou méthode | ✅ GET publics sur l’API Railway |
+| Noms locaux, photos et audio | ✅ champs absents gérés ; lecture HTTPS si une URL audio est renseignée |
+| Suivi à 48 h (notification locale + questionnaire) | Reporté |
 | Icône de l'app | ⏳ en attente d'un logo haute résolution (voir [Logo](#logo)) |
 
 ---
@@ -42,6 +42,20 @@ flutter run
 ```
 
 Pour revoir l'onboarding après l'avoir terminé, désinstaller l'app ou effacer ses données.
+
+### API et parcours intégrés
+
+La base par défaut est `https://phytot-rapie-app-backend-production.up.railway.app`, sans préfixe `/api` et sans token. Pour viser un autre environnement :
+
+```bash
+flutter run --dart-define=API_BASE_URL=https://votre-api.example.com
+```
+
+Les IDs viennent des réponses de l’API, jamais de constantes de production dans le code de l’application. Les maladies ordinaires sont filtrées côté mobile pour contourner la conversion actuelle de `est_urgence=false` côté serveur. La recette et la fiche plante sont chargées séparément ; une fiche vitaminique ne reprend pas automatiquement une posologie de maladie.
+
+Les nouvelles pages proposent recherche locale dans les listes, états vides, chargement, erreur réseau et reprise, ainsi que rafraîchissement par glissement. Les détails sont conservés en mémoire pour la session, sans cache disque du catalogue. Les noms dans les langues sont en Noto Sans, les noms scientifiques en italique. Aucun média n’est inventé quand les URL sont absentes.
+
+Scénarios disponibles au Bénin : Constipation et ses trois plantes, Brûlure thermique et sa méthode, Vitamine C et l’oranger. Voir [le parcours illustré](docs_api/parcours-user-illustre.md) et [la note d’intégration mobile](docs_api/integration-mobile.md).
 
 ### Vérifications avant commit / release
 
@@ -91,15 +105,17 @@ hors-ligne sera ajouté une fois l'app stable. En attendant :
 lib/
 ├── main.dart                       # runApp immédiat + MaterialApp.router
 ├── app/
-│   ├── router/app_router.dart      # Routes : / (splash), /onboarding, /home
+│   ├── router/app_router.dart      # Splash, onboarding, accueil et parcours catalogue
 │   └── theme/                      # app_colors, app_spacing, app_typography, app_theme
 ├── core/
+│   ├── api/public_api.dart         # GET Dio publics, timeouts et erreurs
 │   ├── utils/app_info.dart         # Nom de l'app, slogan, avertissement médical
 │   └── widgets/                    # medical_disclaimer (bas de chaque écran)
 └── features/
     ├── splash/                     # Splash animé → onboarding ou accueil
     ├── onboarding/                 # 3 pages + indicateur « déjà vu » (shared_preferences)
-    └── home/                       # Accueil : recherche + Maladie / Urgences / Vitamines
+    ├── home/                       # Entrées des trois parcours et recherche
+    └── catalogue/                  # Entités, repository, providers, listes et fiches
 ```
 
 ### Dépendances
@@ -109,6 +125,8 @@ lib/
 | `flutter_riverpod` ^2.6 | State management |
 | `go_router` | Navigation |
 | `shared_preferences` | Préférences locales (onboarding vu) |
+| `dio` | GET publics de l’API, timeouts et gestion des erreurs |
+| `just_audio` | Lecture des noms locaux quand audio_url est renseigné |
 
 Les polices ne passent pas par `google_fonts` : elles sont déclarées dans `pubspec.yaml`.
 | `flutter_native_splash` (dev) | Génération du splash natif |
@@ -223,12 +241,9 @@ Cible envisagée : `com.<domaine-du-client>.app`, à caler sur le nom de domaine
 
 ## Points ouverts
 
-- **Contrat d'API** (endpoints + exemples JSON) : nécessaire pour les parcours et la fiche plante.
-- **Authentification** : l'API sera-t-elle appelée sans compte, ou avec un token ? La réponse
-  décide si l'`AuthInterceptor` du guide est utile.
+- **Catalogue** : contrat disponible dans [docs_api/api-client.md](docs_api/api-client.md) et intégré. Les appels mobiles sont publics, sans compte ni token admin.
 - **Hors-ligne** : reporté. Voir [Connexion internet requise](#connexion-internet-requise).
-- **Permission des notifications** : à demander avec l'implémentation du suivi à 48 h (l'onboarding
-  l'annonce déjà en page 3).
+- **Notifications et suivi** : reportés ; aucune permission ni promesse de rappel dans l’onboarding actuel.
 - **Logo haute résolution** : pour l'icône de l'app et le splash natif.
 - **Nom définitif et identifiants** : à valider par le client avant publication (disponibilité
   stores, domaine, marque OAPI).

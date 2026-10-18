@@ -1,0 +1,936 @@
+{
+  "/health": {
+    "status": "ok",
+    "service": "afro-mansin-api"
+  },
+  "/contrees": [
+    {
+      "id_contree": 1,
+      "nom": "Bénin"
+    }
+  ],
+  "/langues": [
+    {
+      "id_langue": 3,
+      "nom": "Anglais"
+    },
+    {
+      "id_langue": 4,
+      "nom": "Fon"
+    },
+    {
+      "id_langue": 1,
+      "nom": "Français"
+    },
+    {
+      "id_langue": 6,
+      "nom": "Goun"
+    },
+    {
+      "id_langue": 5,
+      "nom": "Yoruba"
+    }
+  ],
+  "/plantes": [
+    {
+      "id_plante": 4,
+      "nom_francais": "Orange(r) doux",
+      "nom_scientifique": "Citrus sinensis",
+      "famille": null,
+      "description": "Arbre à feuilles persistantes\nvert foncé, à fleurs blanches parfumées et à\nfruits orange (10 m de haut).",
+      "repartition": "Originaire\ndes régions tropicales d'Asie, cet arbre estcultivé dans toutes les zones tropicales\net subtropicales.",
+      "reconnaissance_astuces": null,
+      "partie_utile": null,
+      "contre_indications": null,
+      "effets_indesirables_connus": null,
+      "mise_en_garde_speciale": "ATTENTION Ne pas absorber les huiles\nessentielles sans contrôle médical si l'on en consomme trop, son\nacidité favorise l'arthrite",
+      "reference_bibliographique": "Larousse des plantes medecinales",
+      "photos": [],
+      "noms_locaux": [
+        {
+          "id_plante": 4,
+          "id_langue": 1,
+          "nom_local": "Orange(r) doux",
+          "audio_url": null,
+          "langue": {
+            "id_langue": 1,
+            "nom": "Français"
+          }
+        },
+        {
+          "id_plante": 4,
+          "id_langue": 3,
+          "nom_local": "sweet orange",
+          "audio_url": null,
+          "langue": {
+            "id_langue": 3,
+            "nom": "Anglais"
+          }
+        },
+        {
+          "id_plante": 4,
+          "id_langue": 4,
+          "nom_local": "yovozin",
+          "audio_url": null,
+          "langue": {
+            "id_langue": 4,
+            "nom": "Fon"
+          }
+        }
+      ]
+    },
+    {
+      "id_plante": 3,
+      "nom_francais": "Papayier",
+      "nom_scientifique": "Carica papaya",
+      "famille": null,
+      "description": "Arbrisseau à croissance très\nrapide, à feuilles découpées, à fleurs jaunes\net à grands fruits (papayes) jaune-orangé\nà graines noires (8 m de haut)",
+      "repartition": "la papaye est cultivée\ndans toutes les régions tropicales.",
+      "reconnaissance_astuces": null,
+      "partie_utile": null,
+      "contre_indications": null,
+      "effets_indesirables_connus": null,
+      "mise_en_garde_speciale": null,
+      "reference_bibliographique": null,
+      "photos": [],
+      "noms_locaux": [
+        {
+          "id_plante": 3,
+          "id_langue": 1,
+          "nom_local": "Papayier",
+          "audio_url": null,
+          "langue": {
+            "id_langue": 1,
+            "nom": "Français"
+          }
+        },
+        {
+          "id_plante": 3,
+          "id_langue": 3,
+          "nom_local": "papaya",
+          "audio_url": null,
+          "langue": {
+            "id_langue": 3,
+            "nom": "Anglais"
+          }
+        },
+        {
+          "id_plante": 3,
+          "id_langue": 4,
+          "nom_local": "Kpenti",
+          "audio_url": null,
+          "langue": {
+            "id_langue": 4,
+            "nom": "Fon"
+          }
+        }
+      ]
+    },
+    {
+      "id_plante": 1,
+      "nom_francais": "Séné africain",
+      "nom_scientifique": "Cassia italica",
+      "famille": null,
+      "description": "C'est un petit arbuste dépassant rarement 50 cm de haut. Les\nfeuilles sont composées pennées, les fruits sont des gousses\nplates et arrondies.",
+      "repartition": "Régions sèches d'Afrique",
+      "reconnaissance_astuces": null,
+      "partie_utile": "Tige feuillées sans les gousses",
+      "contre_indications": "Femme enceinte ou Allaitement,",
+      "effets_indesirables_connus": "Diarrhées, douleurs gastriques, colique",
+      "mise_en_garde_speciale": "Pas d'usage à long terme",
+      "reference_bibliographique": "PLANTES MEDICINALES\nAFRICAINES, Jean-Louis POUSSET",
+      "photos": [],
+      "noms_locaux": [
+        {
+          "id_plante": 1,
+          "id_langue": 1,
+          "nom_local": "Séné africain",
+          "audio_url": null,
+          "langue": {
+            "id_langue": 1,
+            "nom": "Français"
+          }
+        },
+        {
+          "id_plante": 1,
+          "id_langue": 3,
+          "nom_local": "Senegal\nTripoli\nItalian\nJamaica\nPort Royal senna",
+          "audio_url": null,
+          "langue": {
+            "id_langue": 3,
+            "nom": "Anglais"
+          }
+        },
+        {
+          "id_plante": 1,
+          "id_langue": 4,
+          "nom_local": "Agwema\nAgouègbé\nAmasu Agweton\nGunuton",
+          "audio_url": null,
+          "langue": {
+            "id_langue": 4,
+            "nom": "Fon"
+          }
+        },
+        {
+          "id_plante": 1,
+          "id_langue": 5,
+          "nom_local": "Filasko",
+          "audio_url": null,
+          "langue": {
+            "id_langue": 5,
+            "nom": "Yoruba"
+          }
+        }
+      ]
+    }
+  ],
+  "/maladies": [
+    {
+      "id_maladie": 1,
+      "nom": "Constipation",
+      "est_urgence": false,
+      "regles_hygiene": null,
+      "id_contree": 1,
+      "contree": {
+        "id_contree": 1,
+        "nom": "Bénin"
+      },
+      "indications": [],
+      "indications_methode": []
+    },
+    {
+      "id_maladie": 2,
+      "nom": "Brûlure thermique",
+      "est_urgence": true,
+      "regles_hygiene": "En cas de brûlure grave ou de doute, rechercher rapidement une aide médicale. Ne pas appliquer de plante, d'huile ou de beurre sur la brûlure. Voir la méthode de premiers secours associée. Source : https://www.nhs.uk/conditions/burns-and-scalds/",
+      "id_contree": 1,
+      "contree": {
+        "id_contree": 1,
+        "nom": "Bénin"
+      },
+      "indications": [],
+      "indications_methode": []
+    }
+  ],
+  "/vitamines": [
+    {
+      "id_vitamine": 1,
+      "nom": "Vitamine C",
+      "id_contree": 1
+    }
+  ],
+  "/methodes": [],
+  "/indications": [
+    {
+      "id_indication": 1,
+      "id_maladie": 1,
+      "id_plante": 1,
+      "methode_preparation": "Verser un litre d'eau chaude sur 20 grammes de feuilles,\nlaisser infuser une demi heure et boire un grand verre\navant de se coucher.",
+      "posologie": "Boire un grand verre avant de se coucher",
+      "regles_hygieno_diet": null,
+      "maladie": {
+        "id_maladie": 1,
+        "nom": "Constipation",
+        "est_urgence": false,
+        "regles_hygiene": null,
+        "id_contree": 1
+      },
+      "plante": {
+        "id_plante": 1,
+        "nom_francais": "Séné africain",
+        "nom_scientifique": "Cassia italica",
+        "famille": null,
+        "description": "C'est un petit arbuste dépassant rarement 50 cm de haut. Les\nfeuilles sont composées pennées, les fruits sont des gousses\nplates et arrondies.",
+        "repartition": "Régions sèches d'Afrique",
+        "reconnaissance_astuces": null,
+        "partie_utile": "Tige feuillées sans les gousses",
+        "contre_indications": "Femme enceinte ou Allaitement,",
+        "effets_indesirables_connus": "Diarrhées, douleurs gastriques, colique",
+        "mise_en_garde_speciale": "Pas d'usage à long terme",
+        "reference_bibliographique": "PLANTES MEDICINALES\nAFRICAINES, Jean-Louis POUSSET"
+      }
+    },
+    {
+      "id_indication": 3,
+      "id_maladie": 1,
+      "id_plante": 3,
+      "methode_preparation": "Laver correctement le fruit vert ou mur et enlever ou non la peau Faire du jus de papaye avec le fruit bien mùr",
+      "posologie": "Mangez 4 ou 5 tranches de papaye crue ou bien mur après le petit-déjeuner et le diner Boire le jus de papaye après le petit-dejeuner et le diner",
+      "regles_hygieno_diet": null,
+      "maladie": {
+        "id_maladie": 1,
+        "nom": "Constipation",
+        "est_urgence": false,
+        "regles_hygiene": null,
+        "id_contree": 1
+      },
+      "plante": {
+        "id_plante": 3,
+        "nom_francais": "Papayier",
+        "nom_scientifique": "Carica papaya",
+        "famille": null,
+        "description": "Arbrisseau à croissance très\nrapide, à feuilles découpées, à fleurs jaunes\net à grands fruits (papayes) jaune-orangé\nà graines noires (8 m de haut)",
+        "repartition": "la papaye est cultivée\ndans toutes les régions tropicales.",
+        "reconnaissance_astuces": null,
+        "partie_utile": null,
+        "contre_indications": null,
+        "effets_indesirables_connus": null,
+        "mise_en_garde_speciale": null,
+        "reference_bibliographique": null
+      }
+    },
+    {
+      "id_indication": 5,
+      "id_maladie": 1,
+      "id_plante": 4,
+      "methode_preparation": "Laver correctement le fruit et enlever la peau ( on obtient le fruit sans le zeste )",
+      "posologie": "consommer le fruit ( sans zeste ) sauf les pépins ,\ntrès acide et amer il facilite la\ndigestion et soulage les flatulences",
+      "regles_hygieno_diet": null,
+      "maladie": {
+        "id_maladie": 1,
+        "nom": "Constipation",
+        "est_urgence": false,
+        "regles_hygiene": null,
+        "id_contree": 1
+      },
+      "plante": {
+        "id_plante": 4,
+        "nom_francais": "Orange(r) doux",
+        "nom_scientifique": "Citrus sinensis",
+        "famille": null,
+        "description": "Arbre à feuilles persistantes\nvert foncé, à fleurs blanches parfumées et à\nfruits orange (10 m de haut).",
+        "repartition": "Originaire\ndes régions tropicales d'Asie, cet arbre estcultivé dans toutes les zones tropicales\net subtropicales.",
+        "reconnaissance_astuces": null,
+        "partie_utile": null,
+        "contre_indications": null,
+        "effets_indesirables_connus": null,
+        "mise_en_garde_speciale": "ATTENTION Ne pas absorber les huiles\nessentielles sans contrôle médical si l'on en consomme trop, son\nacidité favorise l'arthrite",
+        "reference_bibliographique": "Larousse des plantes medecinales"
+      }
+    }
+  ],
+  "/indications-methode": [],
+  "/sources-vitamine": [],
+  "/noms-locaux": [
+    {
+      "id_plante": 1,
+      "id_langue": 1,
+      "nom_local": "Séné africain",
+      "audio_url": null,
+      "langue": {
+        "id_langue": 1,
+        "nom": "Français"
+      }
+    },
+    {
+      "id_plante": 1,
+      "id_langue": 3,
+      "nom_local": "Senegal\nTripoli\nItalian\nJamaica\nPort Royal senna",
+      "audio_url": null,
+      "langue": {
+        "id_langue": 3,
+        "nom": "Anglais"
+      }
+    },
+    {
+      "id_plante": 1,
+      "id_langue": 4,
+      "nom_local": "Agwema\nAgouègbé\nAmasu Agweton\nGunuton",
+      "audio_url": null,
+      "langue": {
+        "id_langue": 4,
+        "nom": "Fon"
+      }
+    },
+    {
+      "id_plante": 1,
+      "id_langue": 5,
+      "nom_local": "Filasko",
+      "audio_url": null,
+      "langue": {
+        "id_langue": 5,
+        "nom": "Yoruba"
+      }
+    },
+    {
+      "id_plante": 3,
+      "id_langue": 1,
+      "nom_local": "Papayier",
+      "audio_url": null,
+      "langue": {
+        "id_langue": 1,
+        "nom": "Français"
+      }
+    },
+    {
+      "id_plante": 3,
+      "id_langue": 3,
+      "nom_local": "papaya",
+      "audio_url": null,
+      "langue": {
+        "id_langue": 3,
+        "nom": "Anglais"
+      }
+    },
+    {
+      "id_plante": 3,
+      "id_langue": 4,
+      "nom_local": "Kpenti",
+      "audio_url": null,
+      "langue": {
+        "id_langue": 4,
+        "nom": "Fon"
+      }
+    },
+    {
+      "id_plante": 4,
+      "id_langue": 1,
+      "nom_local": "Orange(r) doux",
+      "audio_url": null,
+      "langue": {
+        "id_langue": 1,
+        "nom": "Français"
+      }
+    },
+    {
+      "id_plante": 4,
+      "id_langue": 3,
+      "nom_local": "sweet orange",
+      "audio_url": null,
+      "langue": {
+        "id_langue": 3,
+        "nom": "Anglais"
+      }
+    },
+    {
+      "id_plante": 4,
+      "id_langue": 4,
+      "nom_local": "yovozin",
+      "audio_url": null,
+      "langue": {
+        "id_langue": 4,
+        "nom": "Fon"
+      }
+    }
+  ],
+  "/photos-plante": [],
+  "/contrees/1": {
+    "id_contree": 1,
+    "nom": "Bénin"
+  },
+  "/maladies/1": {
+    "id_maladie": 1,
+    "nom": "Constipation",
+    "est_urgence": false,
+    "regles_hygiene": null,
+    "id_contree": 1,
+    "contree": {
+      "id_contree": 1,
+      "nom": "Bénin"
+    },
+    "indications": [
+      {
+        "id_indication": 1,
+        "id_maladie": 1,
+        "id_plante": 1,
+        "methode_preparation": "Verser un litre d'eau chaude sur 20 grammes de feuilles,\nlaisser infuser une demi heure et boire un grand verre\navant de se coucher.",
+        "posologie": "Boire un grand verre avant de se coucher",
+        "regles_hygieno_diet": null,
+        "plante": {
+          "id_plante": 1,
+          "nom_francais": "Séné africain",
+          "nom_scientifique": "Cassia italica",
+          "famille": null,
+          "description": "C'est un petit arbuste dépassant rarement 50 cm de haut. Les\nfeuilles sont composées pennées, les fruits sont des gousses\nplates et arrondies.",
+          "repartition": "Régions sèches d'Afrique",
+          "reconnaissance_astuces": null,
+          "partie_utile": "Tige feuillées sans les gousses",
+          "contre_indications": "Femme enceinte ou Allaitement,",
+          "effets_indesirables_connus": "Diarrhées, douleurs gastriques, colique",
+          "mise_en_garde_speciale": "Pas d'usage à long terme",
+          "reference_bibliographique": "PLANTES MEDICINALES\nAFRICAINES, Jean-Louis POUSSET"
+        }
+      },
+      {
+        "id_indication": 3,
+        "id_maladie": 1,
+        "id_plante": 3,
+        "methode_preparation": "Laver correctement le fruit vert ou mur et enlever ou non la peau Faire du jus de papaye avec le fruit bien mùr",
+        "posologie": "Mangez 4 ou 5 tranches de papaye crue ou bien mur après le petit-déjeuner et le diner Boire le jus de papaye après le petit-dejeuner et le diner",
+        "regles_hygieno_diet": null,
+        "plante": {
+          "id_plante": 3,
+          "nom_francais": "Papayier",
+          "nom_scientifique": "Carica papaya",
+          "famille": null,
+          "description": "Arbrisseau à croissance très\nrapide, à feuilles découpées, à fleurs jaunes\net à grands fruits (papayes) jaune-orangé\nà graines noires (8 m de haut)",
+          "repartition": "la papaye est cultivée\ndans toutes les régions tropicales.",
+          "reconnaissance_astuces": null,
+          "partie_utile": null,
+          "contre_indications": null,
+          "effets_indesirables_connus": null,
+          "mise_en_garde_speciale": null,
+          "reference_bibliographique": null
+        }
+      },
+      {
+        "id_indication": 5,
+        "id_maladie": 1,
+        "id_plante": 4,
+        "methode_preparation": "Laver correctement le fruit et enlever la peau ( on obtient le fruit sans le zeste )",
+        "posologie": "consommer le fruit ( sans zeste ) sauf les pépins ,\ntrès acide et amer il facilite la\ndigestion et soulage les flatulences",
+        "regles_hygieno_diet": null,
+        "plante": {
+          "id_plante": 4,
+          "nom_francais": "Orange(r) doux",
+          "nom_scientifique": "Citrus sinensis",
+          "famille": null,
+          "description": "Arbre à feuilles persistantes\nvert foncé, à fleurs blanches parfumées et à\nfruits orange (10 m de haut).",
+          "repartition": "Originaire\ndes régions tropicales d'Asie, cet arbre estcultivé dans toutes les zones tropicales\net subtropicales.",
+          "reconnaissance_astuces": null,
+          "partie_utile": null,
+          "contre_indications": null,
+          "effets_indesirables_connus": null,
+          "mise_en_garde_speciale": "ATTENTION Ne pas absorber les huiles\nessentielles sans contrôle médical si l'on en consomme trop, son\nacidité favorise l'arthrite",
+          "reference_bibliographique": "Larousse des plantes medecinales"
+        }
+      }
+    ],
+    "indications_methode": []
+  },
+  "/plantes/4": {
+    "id_plante": 4,
+    "nom_francais": "Orange(r) doux",
+    "nom_scientifique": "Citrus sinensis",
+    "famille": null,
+    "description": "Arbre à feuilles persistantes\nvert foncé, à fleurs blanches parfumées et à\nfruits orange (10 m de haut).",
+    "repartition": "Originaire\ndes régions tropicales d'Asie, cet arbre estcultivé dans toutes les zones tropicales\net subtropicales.",
+    "reconnaissance_astuces": null,
+    "partie_utile": null,
+    "contre_indications": null,
+    "effets_indesirables_connus": null,
+    "mise_en_garde_speciale": "ATTENTION Ne pas absorber les huiles\nessentielles sans contrôle médical si l'on en consomme trop, son\nacidité favorise l'arthrite",
+    "reference_bibliographique": "Larousse des plantes medecinales",
+    "photos": [],
+    "noms_locaux": [
+      {
+        "id_plante": 4,
+        "id_langue": 1,
+        "nom_local": "Orange(r) doux",
+        "audio_url": null,
+        "langue": {
+          "id_langue": 1,
+          "nom": "Français"
+        }
+      },
+      {
+        "id_plante": 4,
+        "id_langue": 3,
+        "nom_local": "sweet orange",
+        "audio_url": null,
+        "langue": {
+          "id_langue": 3,
+          "nom": "Anglais"
+        }
+      },
+      {
+        "id_plante": 4,
+        "id_langue": 4,
+        "nom_local": "yovozin",
+        "audio_url": null,
+        "langue": {
+          "id_langue": 4,
+          "nom": "Fon"
+        }
+      }
+    ],
+    "indications": [
+      {
+        "id_indication": 5,
+        "id_maladie": 1,
+        "id_plante": 4,
+        "methode_preparation": "Laver correctement le fruit et enlever la peau ( on obtient le fruit sans le zeste )",
+        "posologie": "consommer le fruit ( sans zeste ) sauf les pépins ,\ntrès acide et amer il facilite la\ndigestion et soulage les flatulences",
+        "regles_hygieno_diet": null,
+        "maladie": {
+          "id_maladie": 1,
+          "nom": "Constipation",
+          "est_urgence": false,
+          "regles_hygiene": null,
+          "id_contree": 1
+        }
+      }
+    ]
+  },
+  "/plantes/3": {
+    "id_plante": 3,
+    "nom_francais": "Papayier",
+    "nom_scientifique": "Carica papaya",
+    "famille": null,
+    "description": "Arbrisseau à croissance très\nrapide, à feuilles découpées, à fleurs jaunes\net à grands fruits (papayes) jaune-orangé\nà graines noires (8 m de haut)",
+    "repartition": "la papaye est cultivée\ndans toutes les régions tropicales.",
+    "reconnaissance_astuces": null,
+    "partie_utile": null,
+    "contre_indications": null,
+    "effets_indesirables_connus": null,
+    "mise_en_garde_speciale": null,
+    "reference_bibliographique": null,
+    "photos": [],
+    "noms_locaux": [
+      {
+        "id_plante": 3,
+        "id_langue": 1,
+        "nom_local": "Papayier",
+        "audio_url": null,
+        "langue": {
+          "id_langue": 1,
+          "nom": "Français"
+        }
+      },
+      {
+        "id_plante": 3,
+        "id_langue": 3,
+        "nom_local": "papaya",
+        "audio_url": null,
+        "langue": {
+          "id_langue": 3,
+          "nom": "Anglais"
+        }
+      },
+      {
+        "id_plante": 3,
+        "id_langue": 4,
+        "nom_local": "Kpenti",
+        "audio_url": null,
+        "langue": {
+          "id_langue": 4,
+          "nom": "Fon"
+        }
+      }
+    ],
+    "indications": [
+      {
+        "id_indication": 3,
+        "id_maladie": 1,
+        "id_plante": 3,
+        "methode_preparation": "Laver correctement le fruit vert ou mur et enlever ou non la peau Faire du jus de papaye avec le fruit bien mùr",
+        "posologie": "Mangez 4 ou 5 tranches de papaye crue ou bien mur après le petit-déjeuner et le diner Boire le jus de papaye après le petit-dejeuner et le diner",
+        "regles_hygieno_diet": null,
+        "maladie": {
+          "id_maladie": 1,
+          "nom": "Constipation",
+          "est_urgence": false,
+          "regles_hygiene": null,
+          "id_contree": 1
+        }
+      }
+    ]
+  },
+  "/plantes/1": {
+    "id_plante": 1,
+    "nom_francais": "Séné africain",
+    "nom_scientifique": "Cassia italica",
+    "famille": null,
+    "description": "C'est un petit arbuste dépassant rarement 50 cm de haut. Les\nfeuilles sont composées pennées, les fruits sont des gousses\nplates et arrondies.",
+    "repartition": "Régions sèches d'Afrique",
+    "reconnaissance_astuces": null,
+    "partie_utile": "Tige feuillées sans les gousses",
+    "contre_indications": "Femme enceinte ou Allaitement,",
+    "effets_indesirables_connus": "Diarrhées, douleurs gastriques, colique",
+    "mise_en_garde_speciale": "Pas d'usage à long terme",
+    "reference_bibliographique": "PLANTES MEDICINALES\nAFRICAINES, Jean-Louis POUSSET",
+    "photos": [],
+    "noms_locaux": [
+      {
+        "id_plante": 1,
+        "id_langue": 1,
+        "nom_local": "Séné africain",
+        "audio_url": null,
+        "langue": {
+          "id_langue": 1,
+          "nom": "Français"
+        }
+      },
+      {
+        "id_plante": 1,
+        "id_langue": 3,
+        "nom_local": "Senegal\nTripoli\nItalian\nJamaica\nPort Royal senna",
+        "audio_url": null,
+        "langue": {
+          "id_langue": 3,
+          "nom": "Anglais"
+        }
+      },
+      {
+        "id_plante": 1,
+        "id_langue": 4,
+        "nom_local": "Agwema\nAgouègbé\nAmasu Agweton\nGunuton",
+        "audio_url": null,
+        "langue": {
+          "id_langue": 4,
+          "nom": "Fon"
+        }
+      },
+      {
+        "id_plante": 1,
+        "id_langue": 5,
+        "nom_local": "Filasko",
+        "audio_url": null,
+        "langue": {
+          "id_langue": 5,
+          "nom": "Yoruba"
+        }
+      }
+    ],
+    "indications": [
+      {
+        "id_indication": 1,
+        "id_maladie": 1,
+        "id_plante": 1,
+        "methode_preparation": "Verser un litre d'eau chaude sur 20 grammes de feuilles,\nlaisser infuser une demi heure et boire un grand verre\navant de se coucher.",
+        "posologie": "Boire un grand verre avant de se coucher",
+        "regles_hygieno_diet": null,
+        "maladie": {
+          "id_maladie": 1,
+          "nom": "Constipation",
+          "est_urgence": false,
+          "regles_hygiene": null,
+          "id_contree": 1
+        }
+      }
+    ]
+  },
+  "/indications/1": {
+    "id_indication": 1,
+    "id_maladie": 1,
+    "id_plante": 1,
+    "methode_preparation": "Verser un litre d'eau chaude sur 20 grammes de feuilles,\nlaisser infuser une demi heure et boire un grand verre\navant de se coucher.",
+    "posologie": "Boire un grand verre avant de se coucher",
+    "regles_hygieno_diet": null,
+    "maladie": {
+      "id_maladie": 1,
+      "nom": "Constipation",
+      "est_urgence": false,
+      "regles_hygiene": null,
+      "id_contree": 1
+    },
+    "plante": {
+      "id_plante": 1,
+      "nom_francais": "Séné africain",
+      "nom_scientifique": "Cassia italica",
+      "famille": null,
+      "description": "C'est un petit arbuste dépassant rarement 50 cm de haut. Les\nfeuilles sont composées pennées, les fruits sont des gousses\nplates et arrondies.",
+      "repartition": "Régions sèches d'Afrique",
+      "reconnaissance_astuces": null,
+      "partie_utile": "Tige feuillées sans les gousses",
+      "contre_indications": "Femme enceinte ou Allaitement,",
+      "effets_indesirables_connus": "Diarrhées, douleurs gastriques, colique",
+      "mise_en_garde_speciale": "Pas d'usage à long terme",
+      "reference_bibliographique": "PLANTES MEDICINALES\nAFRICAINES, Jean-Louis POUSSET"
+    }
+  },
+  "/indications/3": {
+    "id_indication": 3,
+    "id_maladie": 1,
+    "id_plante": 3,
+    "methode_preparation": "Laver correctement le fruit vert ou mur et enlever ou non la peau Faire du jus de papaye avec le fruit bien mùr",
+    "posologie": "Mangez 4 ou 5 tranches de papaye crue ou bien mur après le petit-déjeuner et le diner Boire le jus de papaye après le petit-dejeuner et le diner",
+    "regles_hygieno_diet": null,
+    "maladie": {
+      "id_maladie": 1,
+      "nom": "Constipation",
+      "est_urgence": false,
+      "regles_hygiene": null,
+      "id_contree": 1
+    },
+    "plante": {
+      "id_plante": 3,
+      "nom_francais": "Papayier",
+      "nom_scientifique": "Carica papaya",
+      "famille": null,
+      "description": "Arbrisseau à croissance très\nrapide, à feuilles découpées, à fleurs jaunes\net à grands fruits (papayes) jaune-orangé\nà graines noires (8 m de haut)",
+      "repartition": "la papaye est cultivée\ndans toutes les régions tropicales.",
+      "reconnaissance_astuces": null,
+      "partie_utile": null,
+      "contre_indications": null,
+      "effets_indesirables_connus": null,
+      "mise_en_garde_speciale": null,
+      "reference_bibliographique": null
+    }
+  },
+  "/indications/5": {
+    "id_indication": 5,
+    "id_maladie": 1,
+    "id_plante": 4,
+    "methode_preparation": "Laver correctement le fruit et enlever la peau ( on obtient le fruit sans le zeste )",
+    "posologie": "consommer le fruit ( sans zeste ) sauf les pépins ,\ntrès acide et amer il facilite la\ndigestion et soulage les flatulences",
+    "regles_hygieno_diet": null,
+    "maladie": {
+      "id_maladie": 1,
+      "nom": "Constipation",
+      "est_urgence": false,
+      "regles_hygiene": null,
+      "id_contree": 1
+    },
+    "plante": {
+      "id_plante": 4,
+      "nom_francais": "Orange(r) doux",
+      "nom_scientifique": "Citrus sinensis",
+      "famille": null,
+      "description": "Arbre à feuilles persistantes\nvert foncé, à fleurs blanches parfumées et à\nfruits orange (10 m de haut).",
+      "repartition": "Originaire\ndes régions tropicales d'Asie, cet arbre estcultivé dans toutes les zones tropicales\net subtropicales.",
+      "reconnaissance_astuces": null,
+      "partie_utile": null,
+      "contre_indications": null,
+      "effets_indesirables_connus": null,
+      "mise_en_garde_speciale": "ATTENTION Ne pas absorber les huiles\nessentielles sans contrôle médical si l'on en consomme trop, son\nacidité favorise l'arthrite",
+      "reference_bibliographique": "Larousse des plantes medecinales"
+    }
+  },
+  "/maladies/2": {
+    "id_maladie": 2,
+    "nom": "Brûlure thermique",
+    "est_urgence": true,
+    "regles_hygiene": "En cas de brûlure grave ou de doute, rechercher rapidement une aide médicale. Ne pas appliquer de plante, d'huile ou de beurre sur la brûlure. Voir la méthode de premiers secours associée. Source : https://www.nhs.uk/conditions/burns-and-scalds/",
+    "id_contree": 1,
+    "contree": {
+      "id_contree": 1,
+      "nom": "Bénin"
+    },
+    "indications": [],
+    "indications_methode": [
+      {
+        "id_maladie": 2,
+        "id_methode": 1,
+        "description": "Brûlure thermique : agir immédiatement. Faire refroidir la zone sous une eau courante fraîche pendant 20 minutes, dès que possible et dans les 3 heures suivant la brûlure. Retirer les bijoux et les vêtements proches, sans arracher ce qui adhère à la peau. Après refroidissement, poser un film alimentaire sans serrer ni l'enrouler autour du membre. Ne pas appliquer de crème, d'huile ou de beurre et ne pas percer les cloques. Une brûlure étendue, profonde, du visage, des organes génitaux ou des fesses, électrique ou chimique nécessite une prise en charge urgente. En cas de doute, notamment chez un jeune enfant, consulter rapidement un professionnel de santé. Source : NHS, Burns and scalds, https://www.nhs.uk/conditions/burns-and-scalds/ (consulté le 18 octobre 2026).",
+        "methode": {
+          "id_methode": 1,
+          "nom": "Refroidissement d’une brûlure thermique",
+          "description": "Brûlure thermique : agir immédiatement. Faire refroidir la zone sous une eau courante fraîche pendant 20 minutes, dès que possible et dans les 3 heures suivant la brûlure. Retirer les bijoux et les vêtements proches, sans arracher ce qui adhère à la peau. Après refroidissement, poser un film alimentaire sans serrer ni l'enrouler autour du membre. Ne pas appliquer de crème, d'huile ou de beurre et ne pas percer les cloques. Une brûlure étendue, profonde, du visage, des organes génitaux ou des fesses, électrique ou chimique nécessite une prise en charge urgente. En cas de doute, notamment chez un jeune enfant, consulter rapidement un professionnel de santé. Source : NHS, Burns and scalds, https://www.nhs.uk/conditions/burns-and-scalds/ (consulté le 18 octobre 2026).",
+          "id_contree": 1
+        }
+      }
+    ]
+  },
+  "/methodes/1": {
+    "id_methode": 1,
+    "nom": "Refroidissement d’une brûlure thermique",
+    "description": "Brûlure thermique : agir immédiatement. Faire refroidir la zone sous une eau courante fraîche pendant 20 minutes, dès que possible et dans les 3 heures suivant la brûlure. Retirer les bijoux et les vêtements proches, sans arracher ce qui adhère à la peau. Après refroidissement, poser un film alimentaire sans serrer ni l'enrouler autour du membre. Ne pas appliquer de crème, d'huile ou de beurre et ne pas percer les cloques. Une brûlure étendue, profonde, du visage, des organes génitaux ou des fesses, électrique ou chimique nécessite une prise en charge urgente. En cas de doute, notamment chez un jeune enfant, consulter rapidement un professionnel de santé. Source : NHS, Burns and scalds, https://www.nhs.uk/conditions/burns-and-scalds/ (consulté le 18 octobre 2026).",
+    "id_contree": 1,
+    "contree": {
+      "id_contree": 1,
+      "nom": "Bénin"
+    },
+    "indications_methode": [
+      {
+        "id_maladie": 2,
+        "id_methode": 1,
+        "description": "Brûlure thermique : agir immédiatement. Faire refroidir la zone sous une eau courante fraîche pendant 20 minutes, dès que possible et dans les 3 heures suivant la brûlure. Retirer les bijoux et les vêtements proches, sans arracher ce qui adhère à la peau. Après refroidissement, poser un film alimentaire sans serrer ni l'enrouler autour du membre. Ne pas appliquer de crème, d'huile ou de beurre et ne pas percer les cloques. Une brûlure étendue, profonde, du visage, des organes génitaux ou des fesses, électrique ou chimique nécessite une prise en charge urgente. En cas de doute, notamment chez un jeune enfant, consulter rapidement un professionnel de santé. Source : NHS, Burns and scalds, https://www.nhs.uk/conditions/burns-and-scalds/ (consulté le 18 octobre 2026).",
+        "maladie": {
+          "id_maladie": 2,
+          "nom": "Brûlure thermique",
+          "est_urgence": true,
+          "regles_hygiene": "En cas de brûlure grave ou de doute, rechercher rapidement une aide médicale. Ne pas appliquer de plante, d'huile ou de beurre sur la brûlure. Voir la méthode de premiers secours associée. Source : https://www.nhs.uk/conditions/burns-and-scalds/",
+          "id_contree": 1
+        }
+      }
+    ]
+  },
+  "/indications-methode/2/1": {
+    "id_maladie": 2,
+    "id_methode": 1,
+    "description": "Brûlure thermique : agir immédiatement. Faire refroidir la zone sous une eau courante fraîche pendant 20 minutes, dès que possible et dans les 3 heures suivant la brûlure. Retirer les bijoux et les vêtements proches, sans arracher ce qui adhère à la peau. Après refroidissement, poser un film alimentaire sans serrer ni l'enrouler autour du membre. Ne pas appliquer de crème, d'huile ou de beurre et ne pas percer les cloques. Une brûlure étendue, profonde, du visage, des organes génitaux ou des fesses, électrique ou chimique nécessite une prise en charge urgente. En cas de doute, notamment chez un jeune enfant, consulter rapidement un professionnel de santé. Source : NHS, Burns and scalds, https://www.nhs.uk/conditions/burns-and-scalds/ (consulté le 18 octobre 2026).",
+    "maladie": {
+      "id_maladie": 2,
+      "nom": "Brûlure thermique",
+      "est_urgence": true,
+      "regles_hygiene": "En cas de brûlure grave ou de doute, rechercher rapidement une aide médicale. Ne pas appliquer de plante, d'huile ou de beurre sur la brûlure. Voir la méthode de premiers secours associée. Source : https://www.nhs.uk/conditions/burns-and-scalds/",
+      "id_contree": 1
+    },
+    "methode": {
+      "id_methode": 1,
+      "nom": "Refroidissement d’une brûlure thermique",
+      "description": "Brûlure thermique : agir immédiatement. Faire refroidir la zone sous une eau courante fraîche pendant 20 minutes, dès que possible et dans les 3 heures suivant la brûlure. Retirer les bijoux et les vêtements proches, sans arracher ce qui adhère à la peau. Après refroidissement, poser un film alimentaire sans serrer ni l'enrouler autour du membre. Ne pas appliquer de crème, d'huile ou de beurre et ne pas percer les cloques. Une brûlure étendue, profonde, du visage, des organes génitaux ou des fesses, électrique ou chimique nécessite une prise en charge urgente. En cas de doute, notamment chez un jeune enfant, consulter rapidement un professionnel de santé. Source : NHS, Burns and scalds, https://www.nhs.uk/conditions/burns-and-scalds/ (consulté le 18 octobre 2026).",
+      "id_contree": 1
+    }
+  },
+  "/vitamines/1": {
+    "id_vitamine": 1,
+    "nom": "Vitamine C",
+    "id_contree": 1,
+    "contree": {
+      "id_contree": 1,
+      "nom": "Bénin"
+    },
+    "sources": [
+      {
+        "id_vitamine": 1,
+        "id_plante": 4,
+        "plante": {
+          "id_plante": 4,
+          "nom_francais": "Orange(r) doux",
+          "nom_scientifique": "Citrus sinensis",
+          "famille": null,
+          "description": "Arbre à feuilles persistantes\nvert foncé, à fleurs blanches parfumées et à\nfruits orange (10 m de haut).",
+          "repartition": "Originaire\ndes régions tropicales d'Asie, cet arbre estcultivé dans toutes les zones tropicales\net subtropicales.",
+          "reconnaissance_astuces": null,
+          "partie_utile": null,
+          "contre_indications": null,
+          "effets_indesirables_connus": null,
+          "mise_en_garde_speciale": "ATTENTION Ne pas absorber les huiles\nessentielles sans contrôle médical si l'on en consomme trop, son\nacidité favorise l'arthrite",
+          "reference_bibliographique": "Larousse des plantes medecinales"
+        }
+      }
+    ]
+  },
+  "/sources-vitamine/1/4": {
+    "id_vitamine": 1,
+    "id_plante": 4,
+    "plante": {
+      "id_plante": 4,
+      "nom_francais": "Orange(r) doux",
+      "nom_scientifique": "Citrus sinensis",
+      "famille": null,
+      "description": "Arbre à feuilles persistantes\nvert foncé, à fleurs blanches parfumées et à\nfruits orange (10 m de haut).",
+      "repartition": "Originaire\ndes régions tropicales d'Asie, cet arbre estcultivé dans toutes les zones tropicales\net subtropicales.",
+      "reconnaissance_astuces": null,
+      "partie_utile": null,
+      "contre_indications": null,
+      "effets_indesirables_connus": null,
+      "mise_en_garde_speciale": "ATTENTION Ne pas absorber les huiles\nessentielles sans contrôle médical si l'on en consomme trop, son\nacidité favorise l'arthrite",
+      "reference_bibliographique": "Larousse des plantes medecinales"
+    },
+    "vitamine": {
+      "id_vitamine": 1,
+      "nom": "Vitamine C",
+      "id_contree": 1
+    }
+  },
+  "/urgences": [
+    {
+      "id_maladie": 2,
+      "nom": "Brûlure thermique",
+      "est_urgence": true,
+      "regles_hygiene": "En cas de brûlure grave ou de doute, rechercher rapidement une aide médicale. Ne pas appliquer de plante, d'huile ou de beurre sur la brûlure. Voir la méthode de premiers secours associée. Source : https://www.nhs.uk/conditions/burns-and-scalds/",
+      "id_contree": 1,
+      "contree": {
+        "id_contree": 1,
+        "nom": "Bénin"
+      },
+      "indications": [],
+      "indications_methode": [
+        {
+          "id_maladie": 2,
+          "id_methode": 1,
+          "description": "Brûlure thermique : agir immédiatement. Faire refroidir la zone sous une eau courante fraîche pendant 20 minutes, dès que possible et dans les 3 heures suivant la brûlure. Retirer les bijoux et les vêtements proches, sans arracher ce qui adhère à la peau. Après refroidissement, poser un film alimentaire sans serrer ni l'enrouler autour du membre. Ne pas appliquer de crème, d'huile ou de beurre et ne pas percer les cloques. Une brûlure étendue, profonde, du visage, des organes génitaux ou des fesses, électrique ou chimique nécessite une prise en charge urgente. En cas de doute, notamment chez un jeune enfant, consulter rapidement un professionnel de santé. Source : NHS, Burns and scalds, https://www.nhs.uk/conditions/burns-and-scalds/ (consulté le 18 octobre 2026).",
+          "methode": {
+            "id_methode": 1,
+            "nom": "Refroidissement d’une brûlure thermique",
+            "description": "Brûlure thermique : agir immédiatement. Faire refroidir la zone sous une eau courante fraîche pendant 20 minutes, dès que possible et dans les 3 heures suivant la brûlure. Retirer les bijoux et les vêtements proches, sans arracher ce qui adhère à la peau. Après refroidissement, poser un film alimentaire sans serrer ni l'enrouler autour du membre. Ne pas appliquer de crème, d'huile ou de beurre et ne pas percer les cloques. Une brûlure étendue, profonde, du visage, des organes génitaux ou des fesses, électrique ou chimique nécessite une prise en charge urgente. En cas de doute, notamment chez un jeune enfant, consulter rapidement un professionnel de santé. Source : NHS, Burns and scalds, https://www.nhs.uk/conditions/burns-and-scalds/ (consulté le 18 octobre 2026).",
+            "id_contree": 1
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,22 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../app/theme/app_colors.dart';
 import '../../../../app/theme/app_spacing.dart';
 import '../../../../core/utils/app_info.dart';
 import '../../../../core/widgets/medical_disclaimer.dart';
 import '../widgets/home_entry_card.dart';
+import '../../../catalogue/domain/catalogue.dart';
+import '../../../catalogue/presentation/catalogue_routes.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
-
-  // Les parcours (choix du pays, puis listes) arrivent avec le contrat d'API.
-  void _comingSoon(BuildContext context) {
-    ScaffoldMessenger.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(
-        const SnackBar(content: Text('Bientôt disponible')),
-      );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,19 +37,19 @@ class HomeScreen extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: AppSpacing.xl),
-                  Text(
-                    'Que recherchez-vous ?',
-                    style: textTheme.headlineLarge,
-                  ),
+                  Text('Que recherchez-vous ?', style: textTheme.headlineLarge),
                   const SizedBox(height: AppSpacing.lg),
-                  _SearchBar(onTap: () => _comingSoon(context)),
+                  _SearchBar(onTap: () => context.push(CatalogueRoutes.search)),
                   const SizedBox(height: AppSpacing.xl),
                   HomeEntryCard(
                     icon: Icons.healing_rounded,
                     color: AppColors.primary,
                     title: 'Maladie',
-                    subtitle: 'Les plantes utilisées selon la maladie ou le symptôme',
-                    onTap: () => _comingSoon(context),
+                    subtitle:
+                        'Les plantes utilisées selon la maladie ou le symptôme',
+                    onTap: () => context.push(
+                      CatalogueRoutes.countries(CatalogueSection.maladies),
+                    ),
                   ),
                   const SizedBox(height: AppSpacing.md),
                   HomeEntryCard(
@@ -63,7 +57,9 @@ class HomeScreen extends StatelessWidget {
                     color: AppColors.danger,
                     title: 'Urgences',
                     subtitle: "Plantes et gestes en cas d'urgence",
-                    onTap: () => _comingSoon(context),
+                    onTap: () => context.push(
+                      CatalogueRoutes.countries(CatalogueSection.urgences),
+                    ),
                   ),
                   const SizedBox(height: AppSpacing.md),
                   HomeEntryCard(
@@ -71,7 +67,9 @@ class HomeScreen extends StatelessWidget {
                     color: AppColors.secondary,
                     title: 'Vitamines',
                     subtitle: 'Les plantes riches en vitamines A, B, C, D',
-                    onTap: () => _comingSoon(context),
+                    onTap: () => context.push(
+                      CatalogueRoutes.countries(CatalogueSection.vitamines),
+                    ),
                   ),
                 ],
               ),
@@ -85,7 +83,7 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-/// Barre de recherche — non fonctionnelle pour l'instant, ouvre la recherche au tap.
+/// Ouvre la recherche locale dans le catalogue public.
 class _SearchBar extends StatelessWidget {
   final VoidCallback onTap;
 
@@ -114,9 +112,9 @@ class _SearchBar extends StatelessWidget {
               const SizedBox(width: AppSpacing.md),
               Text(
                 'Recherche',
-                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                  color: AppColors.textSecondary,
-                ),
+                style: Theme.of(
+                  context,
+                ).textTheme.bodyLarge?.copyWith(color: AppColors.textSecondary),
               ),
             ],
           ),

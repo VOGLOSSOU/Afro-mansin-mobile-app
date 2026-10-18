@@ -15,13 +15,15 @@ const _pages = [
   OnboardingPage(
     imageAsset: 'assets/images/onboarding_1.jpg',
     title: "Le savoir des plantes d'Afrique",
-    body: 'Trouvez les plantes médicinales utilisées dans votre pays : '
+    body:
+        'Trouvez les plantes médicinales utilisées dans votre pays : '
         'par maladie, en cas d\'urgence ou pour vos besoins en vitamines.',
   ),
   OnboardingPage(
     imageAsset: 'assets/images/onboarding_2.jpg',
     title: 'Dans votre langue',
-    body: 'Chaque plante a ses noms en fon, yoruba, adja, dendi… '
+    body:
+        'Chaque plante a ses noms en fon, yoruba, adja, dendi… '
         'Écoutez-les pour la reconnaître et en parler autour de vous.',
   ),
   OnboardingPage(
@@ -30,8 +32,9 @@ const _pages = [
     title: 'Une information, pas une ordonnance',
     body: AppInfo.medicalDisclaimer,
     highlightBody: true,
-    note: '48 heures après avoir consulté une recette, nous vous demanderons '
-        'comment elle s\'est passée, pour améliorer les conseils.',
+    note:
+        'Consultez les précautions de chaque plante. En cas de doute, '
+        'demandez conseil à un professionnel de santé.',
   ),
 ];
 
