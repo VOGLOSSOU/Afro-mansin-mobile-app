@@ -6,6 +6,7 @@ import '../../../../app/theme/app_colors.dart';
 import '../../../../app/theme/app_spacing.dart';
 import '../../../../app/theme/app_typography.dart';
 import '../../../../core/api/public_api.dart';
+import '../../../../core/widgets/medical_disclaimer.dart';
 import '../../domain/catalogue.dart';
 import '../catalogue_routes.dart';
 import '../controllers/catalogue_providers.dart';
@@ -32,6 +33,7 @@ class PlantScreen extends ConsumerWidget {
         : ref.watch(recipeProvider(recipeId!));
     return CataloguePage(
       title: 'Fiche plante',
+      showDisclaimer: false,
       child: CatalogueAsync(
         value: ref.watch(provider),
         retry: () => ref.invalidate(provider),
@@ -68,6 +70,7 @@ class PlantScreen extends ConsumerWidget {
                 text: plant.warning,
                 warning: true,
               ),
+              if (recipeId == null) const MedicalNotice(),
               PlantGallery(photos: plant.photos),
               if (fromVitamin)
                 const CatalogueTextSection(
@@ -243,6 +246,7 @@ class _RecipeSection extends StatelessWidget {
             emergency: recipe.condition?.isEmergency == true,
           ),
           const SizedBox(height: AppSpacing.lg),
+          MedicalNotice(emergency: recipe.condition?.isEmergency == true),
           CatalogueTextSection(
             title: 'Méthode de préparation',
             text: recipe.preparation,

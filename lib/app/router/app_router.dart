@@ -49,6 +49,14 @@ GoRouter createAppRouter({
       builder: (_, _) => const PlantSearchScreen(),
     ),
     GoRoute(
+      path: '/catalogue/:section',
+      builder: (_, state) => _safePage(
+        () => SelectedEntriesScreen(
+          section: CatalogueSection.fromPath(state.pathParameters['section']),
+        ),
+      ),
+    ),
+    GoRoute(
       path: '/catalogue/:section/pays',
       builder: (_, state) => _safePage(
         () => CountriesScreen(

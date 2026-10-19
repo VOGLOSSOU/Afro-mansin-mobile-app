@@ -5,12 +5,17 @@ import 'package:afro_mansin/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:afro_mansin/features/catalogue/presentation/controllers/country_selection.dart';
 
 import 'catalogue_test_support.dart';
 
 void main() {
   late CatalogueAdapter adapter;
-  setUp(() => adapter = CatalogueAdapter());
+  setUp(() {
+    adapter = CatalogueAdapter();
+    SharedPreferences.setMockInitialValues({});
+  });
 
   Future<void> start(
     WidgetTester tester, {
@@ -55,44 +60,44 @@ void main() {
     await tester.pumpAndSettle();
   }
 
-  testWidgets('Maladies : accueil, pays, maladie, plante et recette', (
-    tester,
-  ) async {
-    await start(tester);
-    await tapText(tester, 'Maladie');
-    await tapText(tester, 'Bénin');
-    expect(find.text('Brûlure thermique'), findsNothing);
-    await tapText(tester, 'Constipation');
-    await tapText(tester, 'Séné africain');
-    expect(find.text('Cassia italica'), findsOneWidget);
-    expect(find.text('Aucune photo disponible'), findsOneWidget);
-    await tester.scrollUntilVisible(
-      find.text('Posologie'),
-      400,
-      scrollable: find.byType(Scrollable).first,
-    );
-    expect(
-      find.text('Boire un grand verre avant de se coucher'),
-      findsOneWidget,
-    );
-    expect(find.byIcon(Icons.volume_up_outlined), findsNothing);
-    expect(adapter.requests.any((r) => r.path == '/plantes/1'), isTrue);
-    expect(adapter.requests.any((r) => r.path == '/indications/1'), isTrue);
-    expect(
-      adapter.requests.every(
-        (r) => r.method == 'GET' && !r.headers.containsKey('Authorization'),
-      ),
-      isTrue,
-    );
-    expect(tester.takeException(), isNull);
-  });
+  testWidgets(
+    'Maladies : accueil directement sur le pays par défaut puis recette',
+    (tester) async {
+      await start(tester);
+      await tapText(tester, 'Maladie');
+      expect(find.text('Choisissez votre pays'), findsNothing);
+      expect(find.text('Brûlure thermique'), findsNothing);
+      await tapText(tester, 'Constipation');
+      await tapText(tester, 'Séné africain');
+      expect(find.text('Cassia italica'), findsOneWidget);
+      expect(find.text('Aucune photo disponible'), findsOneWidget);
+      await tester.scrollUntilVisible(
+        find.text('Posologie'),
+        400,
+        scrollable: find.byType(Scrollable).first,
+      );
+      expect(
+        find.text('Boire un grand verre avant de se coucher'),
+        findsOneWidget,
+      );
+      expect(find.byIcon(Icons.volume_up_outlined), findsNothing);
+      expect(adapter.requests.any((r) => r.path == '/plantes/1'), isTrue);
+      expect(adapter.requests.any((r) => r.path == '/indications/1'), isTrue);
+      expect(
+        adapter.requests.every(
+          (r) => r.method == 'GET' && !r.headers.containsKey('Authorization'),
+        ),
+        isTrue,
+      );
+      expect(tester.takeException(), isNull);
+    },
+  );
 
   testWidgets('Urgences : méthode non végétale sans plante fictive', (
     tester,
   ) async {
     await start(tester);
     await tapText(tester, 'Urgences');
-    await tapText(tester, 'Bénin');
     await tapText(tester, 'Brûlure thermique');
     await tapText(tester, 'Refroidissement d’une brûlure thermique');
     expect(find.text('Instructions et précautions'), findsOneWidget);
@@ -112,7 +117,6 @@ void main() {
     (tester) async {
       await start(tester);
       await tapText(tester, 'Vitamines');
-      await tapText(tester, 'Bénin');
       await tapText(tester, 'Vitamine C');
       await tapText(tester, 'Orange(r) doux');
       expect(find.text('Plante source de vitamine'), findsOneWidget);
@@ -125,15 +129,112 @@ void main() {
     },
   );
 
+  testWidgets('Changer de pays recharge la rubrique et mémorise le choix', (
+    tester,
+  ) async {
+    adapter.responses['/contrees'] = [
+      {'id_contree': 7, 'nom': 'Togo'},
+      {'id_contree': 1, 'nom': 'Bénin'},
+    ];
+    await start(tester);
+    expect(find.text('Bénin'), findsOneWidget);
+    await tapText(tester, 'Maladie');
+    await tester.tap(find.byTooltip('Changer de pays'));
+    await tester.pumpAndSettle();
+    await tester.tap(
+      find.ancestor(
+        of: find.text('Togo'),
+        matching: find.byWidgetPredicate(
+          (widget) => widget is CheckedPopupMenuItem,
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+    expect(
+      find.text('Aucune maladie renseignée pour ce pays.'),
+      findsOneWidget,
+    );
+    expect(
+      adapter.requests.any(
+        (r) => r.path == '/maladies' && r.queryParameters['id_contree'] == 7,
+      ),
+      isTrue,
+    );
+    expect(
+      (await SharedPreferences.getInstance()).getInt(CountryPreference.key),
+      7,
+    );
+    await tester.pageBack();
+    await tester.pumpAndSettle();
+    expect(find.text('Togo'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('Le pays mémorisé est restauré au démarrage', (tester) async {
+    adapter.responses['/contrees'] = [
+      {'id_contree': 1, 'nom': 'Bénin'},
+      {'id_contree': 7, 'nom': 'Togo'},
+    ];
+    SharedPreferences.setMockInitialValues({CountryPreference.key: 7});
+    await start(tester);
+    expect(find.text('Togo'), findsOneWidget);
+    await tapText(tester, 'Urgences');
+    expect(
+      find.text('Aucune urgence renseignée pour ce pays.'),
+      findsOneWidget,
+    );
+  });
+
+  testWidgets('Un ancien pays supprimé revient au Bénin avec son ID API', (
+    tester,
+  ) async {
+    adapter.responses['/contrees'] = [
+      {'id_contree': 8, 'nom': 'Togo'},
+      {'id_contree': 42, 'nom': 'Bénin'},
+    ];
+    SharedPreferences.setMockInitialValues({CountryPreference.key: 99});
+    await start(tester);
+    expect(find.text('Bénin'), findsOneWidget);
+    await tapText(tester, 'Vitamines');
+    expect(
+      adapter.requests.any(
+        (r) => r.path == '/vitamines' && r.queryParameters['id_contree'] == 42,
+      ),
+      isTrue,
+    );
+  });
+
+  testWidgets('Sans Bénin : premier pays disponible ; sans pays : état vide', (
+    tester,
+  ) async {
+    adapter.responses['/contrees'] = [
+      {'id_contree': 7, 'nom': 'Togo'},
+    ];
+    await start(tester);
+    expect(find.text('Togo'), findsOneWidget);
+    await tester.pumpWidget(const SizedBox.shrink());
+    await tester.pumpAndSettle();
+    adapter.responses['/contrees'] = [];
+    await start(tester, location: '/catalogue/maladies');
+    expect(find.text('Aucun pays disponible'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('Header sur petit écran avec texte agrandi', (tester) async {
+    await start(tester, scale: 1.8, size: const Size(320, 700));
+    expect(find.byTooltip('Changer de pays'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+
   testWidgets('Erreur de connexion : Réessayer recharge la liste', (
     tester,
   ) async {
     adapter.offline = true;
-    await start(tester, location: '/catalogue/maladies/pays');
+    await start(tester, location: '/catalogue/maladies');
     expect(find.text('Pas de connexion internet'), findsOneWidget);
     adapter.offline = false;
     await tapText(tester, 'Réessayer');
-    expect(find.text('Bénin'), findsOneWidget);
+    expect(find.text('Constipation'), findsOneWidget);
     expect(tester.takeException(), isNull);
   });
 

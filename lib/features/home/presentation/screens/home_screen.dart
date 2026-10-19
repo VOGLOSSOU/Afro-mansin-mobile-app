@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../../catalogue/presentation/controllers/country_selection.dart';
+import '../../../catalogue/presentation/widgets/country_selector.dart';
 
 import '../../../../app/theme/app_colors.dart';
 import '../../../../app/theme/app_spacing.dart';
@@ -9,11 +13,26 @@ import '../widgets/home_entry_card.dart';
 import '../../../catalogue/domain/catalogue.dart';
 import '../../../catalogue/presentation/catalogue_routes.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final country = ref.watch(selectedCountryProvider).asData?.value;
+    void open(CatalogueSection section) {
+      if (country != null) {
+        context.push(CatalogueRoutes.section(section));
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text(
+              'Choisissez un pays dès que la liste est disponible.',
+            ),
+          ),
+        );
+      }
+    }
+
     final textTheme = Theme.of(context).textTheme;
 
     return Scaffold(
@@ -33,7 +52,15 @@ class HomeScreen extends StatelessWidget {
                     children: [
                       Image.asset('assets/images/logo_symbol.png', height: 36),
                       const SizedBox(width: AppSpacing.sm),
-                      Text(AppInfo.name, style: textTheme.headlineMedium),
+                      Expanded(
+                        child: Text(
+                          AppInfo.name,
+                          style: textTheme.headlineMedium,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                      const CountrySelector(),
                     ],
                   ),
                   const SizedBox(height: AppSpacing.xl),
@@ -47,9 +74,7 @@ class HomeScreen extends StatelessWidget {
                     title: 'Maladie',
                     subtitle:
                         'Les plantes utilisées selon la maladie ou le symptôme',
-                    onTap: () => context.push(
-                      CatalogueRoutes.countries(CatalogueSection.maladies),
-                    ),
+                    onTap: () => open(CatalogueSection.maladies),
                   ),
                   const SizedBox(height: AppSpacing.md),
                   HomeEntryCard(
@@ -57,9 +82,7 @@ class HomeScreen extends StatelessWidget {
                     color: AppColors.danger,
                     title: 'Urgences',
                     subtitle: "Plantes et gestes en cas d'urgence",
-                    onTap: () => context.push(
-                      CatalogueRoutes.countries(CatalogueSection.urgences),
-                    ),
+                    onTap: () => open(CatalogueSection.urgences),
                   ),
                   const SizedBox(height: AppSpacing.md),
                   HomeEntryCard(
@@ -67,9 +90,7 @@ class HomeScreen extends StatelessWidget {
                     color: AppColors.secondary,
                     title: 'Vitamines',
                     subtitle: 'Les plantes riches en vitamines A, B, C, D',
-                    onTap: () => context.push(
-                      CatalogueRoutes.countries(CatalogueSection.vitamines),
-                    ),
+                    onTap: () => open(CatalogueSection.vitamines),
                   ),
                 ],
               ),

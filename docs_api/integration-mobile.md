@@ -4,11 +4,15 @@ Mise à jour : 18 octobre 2026.
 
 ## Navigation
 
-- Accueil > Maladie > pays > maladie > plante > fiche et recette sélectionnée.
-- Accueil > Urgences > pays > urgence > plante ou méthode non végétale selon les associations.
-- Accueil > Vitamines > pays > vitamine > plante source > fiche sans recette vitaminique inventée.
+- Accueil > Maladie > maladie > plante > fiche et recette sélectionnée.
+- Accueil > Urgences > urgence > plante ou méthode non végétale selon les associations.
+- Accueil > Vitamines > vitamine > plante source > fiche sans recette vitaminique inventée.
 - Recherche d’accueil > recherche locale parmi les plantes par nom français, scientifique ou local > fiche ; recettes par maladie accessibles séparément.
 - Autres recettes : exclusion de la recette courante et conservation du pays quand un contexte pays est fourni.
+
+Le pays global est sélectionnable dans le header de l’accueil et des listes. Le Bénin est choisi par son nom dans les données de l’API, sans ID codé en dur. Le choix est mémorisé avec SharedPreferences (identifiant uniquement). Un pays mémorisé absent de la réponse est remplacé par le Bénin, ou le premier pays disponible. Une réponse sans pays affiche un état vide. Un changement sur une liste recharge la rubrique pour le nouveau pays et réinitialise sa recherche. Les fiches déjà ouvertes conservent leur contexte pays et ne proposent pas de changement. La recherche globale de plantes reste indépendante du pays.
+
+Les routes principales sont /catalogue/maladies, /catalogue/urgences et /catalogue/vitamines. Les anciennes routes avec pays explicite restent compatibles.
 
 ## Organisation du code
 
@@ -45,7 +49,7 @@ Les éléments suivants restent hors périmètre : suivi à 48 h, notifications,
 ## Résultat de la validation dans cet environnement
 
 - flutter analyze : aucune issue.
-- flutter test : 17 tests réussis, dont navigation complète des trois parcours, reprise réseau, liens invalides et petit écran avec texte agrandi.
+- flutter test : 22 tests réussis, dont navigation complète des trois parcours, reprise réseau, liens invalides, pays global mémorisé et petit écran avec texte agrandi.
 - Contrôle complémentaire avec le nouveau repository sur l’API réelle : réussi pour les trois parcours, exclusivement en GET.
 - Captures de cinq écrans contrôlées au format téléphone.
 - Compilation native Android : tentée mais non terminée, car les téléchargements de l’outillage Gradle sont trop lents dans cet environnement. Le wrapper du projet est resté en version 8.14. Relancer flutter build appbundle --debug une fois l’outillage disponible.

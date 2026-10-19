@@ -3,9 +3,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../app/theme/app_spacing.dart';
+import '../../../../core/widgets/medical_disclaimer.dart';
 import '../../domain/catalogue.dart';
 import '../catalogue_routes.dart';
 import '../controllers/catalogue_providers.dart';
+import '../controllers/country_selection.dart';
+import '../widgets/country_selector.dart';
 import '../widgets/catalogue_widgets.dart';
 
 class CountriesScreen extends ConsumerWidget {
@@ -38,16 +41,59 @@ class CountriesScreen extends ConsumerWidget {
   );
 }
 
+/// Les routes principales suivent le pays global, sans étape de choix répétée.
+class SelectedEntriesScreen extends ConsumerWidget {
+  const SelectedEntriesScreen({super.key, required this.section});
+  final CatalogueSection section;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final selection = ref.watch(selectedCountryProvider);
+    return selection.when(
+      data: (country) => country == null
+          ? CataloguePage(
+              title: section.label,
+              child: const CatalogueMessage(
+                title: 'Aucun pays disponible',
+                message:
+                    'Le catalogue sera accessible dès qu’un pays sera renseigné.',
+              ),
+            )
+          : EntriesScreen(
+              key: ValueKey(country.id),
+              section: section,
+              countryId: country.id,
+              countryName: country.name,
+              allowCountryChange: true,
+            ),
+      loading: () => CataloguePage(
+        title: section.label,
+        child: const Center(child: CircularProgressIndicator()),
+      ),
+      error: (error, stack) => CataloguePage(
+        title: section.label,
+        child: CatalogueAsync<Country?>(
+          value: selection,
+          retry: () => ref.read(countriesProvider.notifier).reload(),
+          builder: (_) => const SizedBox.shrink(),
+        ),
+      ),
+    );
+  }
+}
+
 class EntriesScreen extends ConsumerWidget {
   const EntriesScreen({
     super.key,
     required this.section,
     required this.countryId,
     required this.countryName,
+    this.allowCountryChange = false,
   });
   final CatalogueSection section;
   final int countryId;
   final String countryName;
+  final bool allowCountryChange;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -55,6 +101,7 @@ class EntriesScreen extends ConsumerWidget {
       final provider = vitaminsProvider(countryId);
       return CataloguePage(
         title: section.label,
+        actions: allowCountryChange ? const [CountrySelector()] : null,
         child: CatalogueAsync(
           value: ref.watch(provider),
           retry: () => ref.read(provider.notifier).reload(),
@@ -84,6 +131,7 @@ class EntriesScreen extends ConsumerWidget {
     ));
     return CataloguePage(
       title: section.label,
+      actions: allowCountryChange ? const [CountrySelector()] : null,
       child: CatalogueAsync(
         value: ref.watch(provider),
         retry: () => ref.read(provider.notifier).reload(),
@@ -124,6 +172,7 @@ class ConditionScreen extends ConsumerWidget {
     final provider = conditionProvider(id);
     return CataloguePage(
       title: 'Informations',
+      showDisclaimer: false,
       child: CatalogueAsync(
         value: ref.watch(provider),
         retry: () => ref.invalidate(provider),
@@ -145,7 +194,8 @@ class ConditionScreen extends ConsumerWidget {
                 subtitle: condition.countryName ?? 'Informations par pays',
                 emergency: condition.isEmergency,
               ),
-              const SizedBox(height: AppSpacing.xl),
+              const SizedBox(height: AppSpacing.lg),
+              if (condition.isEmergency) const MedicalNotice(emergency: true),
               CatalogueTextSection(
                 title: condition.isEmergency
                     ? 'À savoir avant tout'
@@ -286,6 +336,7 @@ class MethodScreen extends ConsumerWidget {
     ));
     return CataloguePage(
       title: 'Méthode',
+      showDisclaimer: false,
       child: CatalogueAsync(
         value: ref.watch(provider),
         retry: () => ref.invalidate(provider),
@@ -309,6 +360,7 @@ class MethodScreen extends ConsumerWidget {
                 emergency: true,
               ),
               const SizedBox(height: AppSpacing.xl),
+              const MedicalNotice(emergency: true),
               CatalogueTextSection(
                 title: 'Instructions et précautions',
                 text: link.description ?? link.method?.description,

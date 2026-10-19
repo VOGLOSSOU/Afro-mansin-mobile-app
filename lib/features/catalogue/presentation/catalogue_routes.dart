@@ -4,6 +4,8 @@ import '../domain/catalogue.dart';
 class CatalogueRoutes {
   CatalogueRoutes._();
   static const search = '/catalogue/recherche';
+  static String section(CatalogueSection section) =>
+      '/catalogue/${section.path}';
   static String countries(CatalogueSection section) =>
       '/catalogue/${section.path}/pays';
   static String entries(

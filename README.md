@@ -1,7 +1,8 @@
 # Ama — application mobile
 
 Application mobile Flutter (Android + iOS) de **plantes médicinales africaines**. L'utilisateur
-choisit un pays, puis une maladie, une urgence ou une vitamine, et arrive sur la fiche d'une
+retrouve le Bénin sélectionné par défaut, peut changer de pays dans le header, puis choisit
+une maladie, une urgence ou une vitamine et arrive sur la fiche d'une
 plante : noms en langues locales (fon, yoruba, adja, dendi…) avec audio, photos, recette,
 posologie et mises en garde. Le suivi post-utilisation à 48 h reste reporté et ne fait pas partie
 des parcours actuellement intégrés.
@@ -25,7 +26,7 @@ techniques portent encore l'ancien nom.
 | Images plein écran de l'onboarding | ✅ `assets/images/onboarding_1-3.jpg` (originaux PNG dans `design/onboarding/`) |
 | Thème et charte graphique | ✅ |
 | Accueil Maladie / Urgences / Vitamines + recherche locale des plantes | ✅ relié aux parcours |
-| Parcours pays → maladie/vitamine/urgence → fiche plante ou méthode | ✅ GET publics sur l’API Railway |
+| Pays global mémorisé → maladie/vitamine/urgence → fiche plante ou méthode | ✅ GET publics sur l’API Railway |
 | Noms locaux, photos et audio | ✅ champs absents gérés ; lecture HTTPS si une URL audio est renseignée |
 | Suivi à 48 h (notification locale + questionnaire) | Reporté |
 | Icône de l'app | ⏳ en attente d'un logo haute résolution (voir [Logo](#logo)) |

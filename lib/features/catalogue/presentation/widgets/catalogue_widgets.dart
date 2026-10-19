@@ -9,13 +9,21 @@ import '../../../../core/widgets/medical_disclaimer.dart';
 import '../../domain/catalogue.dart';
 
 class CataloguePage extends StatelessWidget {
-  const CataloguePage({super.key, required this.title, required this.child});
+  const CataloguePage({
+    super.key,
+    required this.title,
+    required this.child,
+    this.showDisclaimer = true,
+    this.actions,
+  });
   final String title;
   final Widget child;
+  final bool showDisclaimer;
+  final List<Widget>? actions;
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(title: Text(title)),
+    appBar: AppBar(title: Text(title), actions: actions),
     body: SafeArea(
       top: false,
       child: Column(
@@ -28,8 +36,10 @@ class CataloguePage extends StatelessWidget {
               ),
             ),
           ),
-          const Divider(height: 1, color: AppColors.border),
-          const MedicalDisclaimer(),
+          if (showDisclaimer) ...[
+            const Divider(height: 1, color: AppColors.border),
+            const MedicalDisclaimer(),
+          ],
         ],
       ),
     ),
