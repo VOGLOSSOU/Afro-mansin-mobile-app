@@ -37,65 +37,58 @@ class HomeScreen extends ConsumerWidget {
 
     return Scaffold(
       body: SafeArea(
-        child: Column(
+        child: ListView(
+          padding: const EdgeInsets.fromLTRB(
+            AppSpacing.lg,
+            AppSpacing.lg,
+            AppSpacing.lg,
+            AppSpacing.xl,
+          ),
           children: [
-            Expanded(
-              child: ListView(
-                padding: const EdgeInsets.fromLTRB(
-                  AppSpacing.lg,
-                  AppSpacing.lg,
-                  AppSpacing.lg,
-                  AppSpacing.xl,
+            Row(
+              children: [
+                Image.asset('assets/images/logo_symbol.png', height: 36),
+                const SizedBox(width: AppSpacing.sm),
+                Expanded(
+                  child: Text(
+                    AppInfo.name,
+                    style: textTheme.headlineMedium,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
-                children: [
-                  Row(
-                    children: [
-                      Image.asset('assets/images/logo_symbol.png', height: 36),
-                      const SizedBox(width: AppSpacing.sm),
-                      Expanded(
-                        child: Text(
-                          AppInfo.name,
-                          style: textTheme.headlineMedium,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                      const CountrySelector(),
-                    ],
-                  ),
-                  const SizedBox(height: AppSpacing.xl),
-                  Text('Que recherchez-vous ?', style: textTheme.headlineLarge),
-                  const SizedBox(height: AppSpacing.lg),
-                  _SearchBar(onTap: () => context.push(CatalogueRoutes.search)),
-                  const SizedBox(height: AppSpacing.xl),
-                  HomeEntryCard(
-                    icon: Icons.healing_rounded,
-                    color: AppColors.primary,
-                    title: 'Maladie',
-                    subtitle:
-                        'Les plantes utilisées selon la maladie ou le symptôme',
-                    onTap: () => open(CatalogueSection.maladies),
-                  ),
-                  const SizedBox(height: AppSpacing.md),
-                  HomeEntryCard(
-                    icon: Icons.emergency_rounded,
-                    color: AppColors.danger,
-                    title: 'Urgences',
-                    subtitle: "Plantes et gestes en cas d'urgence",
-                    onTap: () => open(CatalogueSection.urgences),
-                  ),
-                  const SizedBox(height: AppSpacing.md),
-                  HomeEntryCard(
-                    icon: Icons.spa_rounded,
-                    color: AppColors.secondary,
-                    title: 'Vitamines',
-                    subtitle: 'Les plantes riches en vitamines A, B, C, D',
-                    onTap: () => open(CatalogueSection.vitamines),
-                  ),
-                ],
-              ),
+                const CountrySelector(),
+              ],
             ),
-            const Divider(height: 1, color: AppColors.border),
+            const SizedBox(height: AppSpacing.xl),
+            Text('Que recherchez-vous ?', style: textTheme.headlineLarge),
+            const SizedBox(height: AppSpacing.lg),
+            _SearchBar(onTap: () => context.push(CatalogueRoutes.search)),
+            const SizedBox(height: AppSpacing.xl),
+            HomeEntryCard(
+              icon: Icons.medical_services_outlined,
+              color: AppColors.primary,
+              title: 'Maladie',
+              subtitle: 'Les plantes utilisées selon la maladie ou le symptôme',
+              onTap: () => open(CatalogueSection.maladies),
+            ),
+            const SizedBox(height: AppSpacing.md),
+            HomeEntryCard(
+              icon: Icons.health_and_safety_outlined,
+              color: AppColors.danger,
+              title: 'Urgences',
+              subtitle: "Plantes et gestes en cas d'urgence",
+              onTap: () => open(CatalogueSection.urgences),
+            ),
+            const SizedBox(height: AppSpacing.md),
+            HomeEntryCard(
+              icon: Icons.spa_outlined,
+              color: AppColors.secondary,
+              title: 'Vitamines',
+              subtitle: 'Les plantes riches en vitamines A, B, C, D',
+              onTap: () => open(CatalogueSection.vitamines),
+            ),
+            const SizedBox(height: AppSpacing.lg),
             const MedicalDisclaimer(),
           ],
         ),

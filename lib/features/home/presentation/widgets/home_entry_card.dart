@@ -38,14 +38,10 @@ class HomeEntryCard extends StatelessWidget {
           ),
           child: Row(
             children: [
-              Container(
-                width: 56,
-                height: 56,
-                decoration: BoxDecoration(
-                  color: color.withValues(alpha: 0.12),
-                  borderRadius: BorderRadius.circular(AppRadius.md),
-                ),
-                child: Icon(icon, size: 30, color: color),
+              SizedBox(
+                width: 40,
+                height: 40,
+                child: Icon(icon, size: 28, color: color),
               ),
               const SizedBox(width: AppSpacing.lg),
               Expanded(
